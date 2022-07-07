@@ -59,27 +59,27 @@ class Database(object):
 # test2()
 
 
-def add_record(data):
-    timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    # db = Database(info)
-    db.query('INSERT INTO Records (houseId, datetime) VALUES ("%d", "%s")' % (data[0], timestamp))  # 创建一个record
-
-    # 拿到刚插入的recordNo
-    rows, record_no = db.query(
-        'SELECT recordNo FROM Records WHERE houseId="%d" AND datetime="%s"' % (data[0], timestamp))
-    shelf_nos = []
-    for i in data[1:]:
-        # print(i)
-        db.query(
-            'INSERT INTO Shelf (position, recordNo, g1, g2, g3, g4, g5) VALUES ("%s", "%d", "%d", "%d", "%d", "%d", "%d")'
-            % (i[0], record_no[0][0], i[1], i[2], i[3], i[4], i[5]))
-        rows, shelf_no = db.query(
-            'SELECT shelfNo FROM Shelf WHERE position="%s" AND recordNo=%d' % (i[0], record_no[0][0]))
-        shelf_nos.append(shelf_no[0][0])
-
-    db.query('UPDATE Records SET A="%d", B="%d", C="%d", D="%d", E="%d", F="%d", G="%d", H="%d", I="%d", J="%d", total="%d" \
-             WHERE recordNo="%d"' % (shelf_nos[0], shelf_nos[1], shelf_nos[2], shelf_nos[3], shelf_nos[4], shelf_nos[5],
-                                     shelf_nos[6], shelf_nos[7], shelf_nos[8], shelf_nos[9], shelf_nos[10],
-                                     record_no[0][0]))
+# def add_record(data):
+#     timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+#     # db = Database(info)
+#     db.query('INSERT INTO Records (houseId, datetime) VALUES ("%d", "%s")' % (data[0], timestamp))  # 创建一个record
+#
+#     # 拿到刚插入的recordNo
+#     rows, record_no = db.query(
+#         'SELECT recordNo FROM Records WHERE houseId="%d" AND datetime="%s"' % (data[0], timestamp))
+#     shelf_nos = []
+#     for i in data[1:]:
+#         # print(i)
+#         db.query(
+#             'INSERT INTO Shelf (position, recordNo, g1, g2, g3, g4, g5) VALUES ("%s", "%d", "%d", "%d", "%d", "%d", "%d")'
+#             % (i[0], record_no[0][0], i[1], i[2], i[3], i[4], i[5]))
+#         rows, shelf_no = db.query(
+#             'SELECT shelfNo FROM Shelf WHERE position="%s" AND recordNo=%d' % (i[0], record_no[0][0]))
+#         shelf_nos.append(shelf_no[0][0])
+#
+#     db.query('UPDATE Records SET A="%d", B="%d", C="%d", D="%d", E="%d", F="%d", G="%d", H="%d", I="%d", J="%d", total="%d" \
+#              WHERE recordNo="%d"' % (shelf_nos[0], shelf_nos[1], shelf_nos[2], shelf_nos[3], shelf_nos[4], shelf_nos[5],
+#                                      shelf_nos[6], shelf_nos[7], shelf_nos[8], shelf_nos[9], shelf_nos[10],
+#                                      record_no[0][0]))
 
 # add_record(simple_data)
