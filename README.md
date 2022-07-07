@@ -9,7 +9,7 @@ Design &amp; Build warehouse monitoring system
 ## 接口说明: 全部使用json格式传输
 
 
-``` http://127.0.0.1:5000/user ```处理用户信息事务
+### ``` http://127.0.0.1:5000/user ```处理用户信息事务
 
 返回格式``` {'status':<状态码>, 'result':<userInfo>}```
 1. 登陆: 
@@ -32,7 +32,7 @@ Design &amp; Build warehouse monitoring system
 
 
 
-``` http://127.0.0.1:5000/inquire ```处理查询事务
+### ``` http://127.0.0.1:5000/inquire ```处理查询事务
 
 1. 当前仓库信息（最新记录）：
     + 请求格式``` {'type': 'now', 'houseId':<warehouseId>}```
@@ -46,7 +46,7 @@ Design &amp; Build warehouse monitoring system
     + 0:正常(默认按日期从进到远)``` {"status": 0, "result": [{"recordNo": 5, "houseId": 1, "datetime": "2022-07-06 17:31:46", "A": {"shelfNo": 23, "position": "A", "recordNo": 5, "g1": 2, "g2": 0, "g3": 0, "g4": 0, "g5": 0}, "B": {"shelfNo": 24, "position": "B", "recordNo": 5, "g1": 0, "g2": 1, "g3": 1, "g4": 0, "g5": 0}, "C": {"shelfNo": 25, "position": "C", "recordNo": 5, "g1": 0, "g2": 0, "g3": 0, "g4": 1, "g5": 3}, "D": {"shelfNo": 26, "position": "D", "recordNo": 5, "g1": 0, "g2": 2, "g3": 0, "g4": 0, "g5": 0}, "E": {"shelfNo": 27, "position": "E", "recordNo": 5, "g1": 0, "g2": 0, "g3": 2, "g4": 0, "g5": 0}, "F": {"shelfNo": 28, "position": "F", "recordNo": 5, "g1": 1, "g2": 0, "g3": 0, "g4": 0, "g5": 0}, "G": {"shelfNo": 29, "position": "G", "recordNo": 5, "g1": 0, "g2": 0, "g3": 1, "g4": 2, "g5": 3}, "H": {"shelfNo": 30, "position": "H", "recordNo": 5, "g1": 0, "g2": 0, "g3": 0, "g4": 0, "g5": 0}, "I": {"shelfNo": 31, "position": "I", "recordNo": 5, "g1": 1, "g2": 0, "g3": 2, "g4": 0, "g5": 0}, "J": {"shelfNo": 32, "position": "J", "recordNo": 5, "g1": 1, "g2": 1, "g3": 1, "g4": 1, "g5": 1}, "total": {"shelfNo": 33, "position": "all", "recordNo": 5, "g1": 5, "g2": 4, "g3": 7, "g4": 4, "g5": 7}}, {"recordNo": 1, "houseId": 1, "datetime": "2022-07-06 14:09:48", "A": {"shelfNo": 1, "position": "A", "recordNo": 1, "g1": 2, "g2": 0, "g3": 0, "g4": 0, "g5": 0}, "B": {"shelfNo": 2, "position": "B", "recordNo": 1, "g1": 0, "g2": 1, "g3": 1, "g4": 0, "g5": 0}, "C": {"shelfNo": 3, "position": "C", "recordNo": 1, "g1": 0, "g2": 0, "g3": 0, "g4": 1, "g5": 3}, "D": {"shelfNo": 4, "position": "D", "recordNo": 1, "g1": 0, "g2": 2, "g3": 0, "g4": 0, "g5": 0}, "E": {"shelfNo": 5, "position": "E", "recordNo": 1, "g1": 0, "g2": 0, "g3": 2, "g4": 0, "g5": 0}, "F": {"shelfNo": 6, "position": "F", "recordNo": 1, "g1": 1, "g2": 0, "g3": 0, "g4": 0, "g5": 0}, "G": {"shelfNo": 7, "position": "G", "recordNo": 1, "g1": 0, "g2": 0, "g3": 1, "g4": 2, "g5": 3}, "H": {"shelfNo": 8, "position": "H", "recordNo": 1, "g1": 0, "g2": 0, "g3": 0, "g4": 0, "g5": 0}, "I": {"shelfNo": 9, "position": "I", "recordNo": 1, "g1": 1, "g2": 0, "g3": 2, "g4": 0, "g5": 0}, "J": {"shelfNo": 10, "position": "J", "recordNo": 1, "g1": 1, "g2": 1, "g3": 1, "g4": 1, "g5": 1}, "total": {"shelfNo": 11, "position": "all", "recordNo": 1, "g1": 5, "g2": 4, "g3": 7, "g4": 4, "g5": 7}}]}```
     + 202：该仓库在此时间段内暂无记录``` {'status': 202, 'result': []}```
 
-``` http://127.0.0.1:5000/upload ```接收小车上传数据
+### ``` http://127.0.0.1:5000/upload ```接收小车上传数据
 1. 数据格式```[1, ["A", 2, 0, 0, 0, 0], ["B", 0, 1, 1, 0, 0], ["C", 0, 0, 0, 1, 3], ["D", 0, 2, 0, 0, 0],
                ["E", 0, 0, 2, 0, 0],
                ["F", 1, 0, 0, 0, 0], ["G", 0, 0, 1, 2, 3], ["H", 0, 0, 0, 0, 0], ["I", 1, 0, 2, 0, 0],
