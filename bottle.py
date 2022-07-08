@@ -1,8 +1,8 @@
-from flask import Flask, request, render_template, url_for
+from bottle import template, Bottle, request
 import json
 from database import *
 
-app = Flask(__name__)
+app = Bottle()
 db_info = {'user': 'root', 'password': 'Cqmyg1sdss', 'host': '127.0.0.1', 'database': 'Warehouse', 'charset': 'utf8'}
 db = Database(db_info)
 
@@ -12,27 +12,12 @@ def hello_world():  # put application's code here
     return render_template('new/login/index.html')
 
 
-@app.route('/records')
-def ret_records():
-    return render_template('new/records/index.html')
-
-
-@app.route('/changeInfo')
-def ret_changeInfo():
-    return render_template('new/changeInfo/index.html')
-
-
-@app.route('/changePwd')
-def ret_changePwd():
-    return render_template('new/changePwd/index.html')
-
-@app.route('/user', methods=['POST'])
+@app.route('/user', method=['POST'])
 def user():
     req = request.json
     # req = request.data
     ret = {}
-    print(req)
-
+    # print(req)
     # print(request.args.__str__())
     # print(request.form)
     if req['type'] == 'login':
@@ -58,14 +43,14 @@ def user():
             ret['result'] = []
     elif req['type'] == 'changeinfo':
         for i in req['info']:
-            db.query('UPDATE Worker SET %s="%s" WHERE workerId="%s"' % (i, req['info'][i], req['id']))
+            db.query('UPDATE Worker SET "%s"="%s" WHERE workerId="%s"' % (i, req['info'][i], req['id']))
         rows, user_info = db.query('SELECT * FROM Worker WHERE workerId="%s"' % (req['id']))
         ret['status'] = 0
         ret['result'] = user_info[0]  # 返回更新后的信息
     return json.dumps(ret, default=str)
 
 
-@app.route('/inquire', methods=['POST'])
+@app.route('/inquire', method=['POST'])
 def inquire():
     req = request.json
     ret = {}
@@ -103,8 +88,8 @@ def inquire():
     return json.dumps(ret, default=str)
 
 
-@app.route('/upload', methods=['POST'])
-def receive_data ():
+@app.route('/upload', method=['POST'])
+def receive_data():
     req = request.json
     ret = {}
 
@@ -128,28 +113,30 @@ def receive_data ():
 
         db.query('UPDATE Records SET A="%d", B="%d", C="%d", D="%d", E="%d", F="%d", G="%d", H="%d", I="%d", J="%d", total="%d" \
                  WHERE recordNo="%d"' % (
-        shelf_nos[0], shelf_nos[1], shelf_nos[2], shelf_nos[3], shelf_nos[4], shelf_nos[5],
-        shelf_nos[6], shelf_nos[7], shelf_nos[8], shelf_nos[9], shelf_nos[10],
-        record_no[0][0]))
+            shelf_nos[0], shelf_nos[1], shelf_nos[2], shelf_nos[3], shelf_nos[4], shelf_nos[5],
+            shelf_nos[6], shelf_nos[7], shelf_nos[8], shelf_nos[9], shelf_nos[10],
+            record_no[0][0]))
 
     add_record(req)
     ret['status'] = '0'
     return json.dumps(ret, default=str)
 
 
-@app.route('/test', methods=['POST'])
-def testtest ():
+@app.route('/test', method=['POST'])
+def testtest():
     req_json = request.json
     print(req_json)
 
-    print(type(req_json))
-    addr = request.remote_addr
-    content_len = request.content_length
-    ret = {}
-    print(addr)
-    print(content_len)
-    return json.dumps(ret, default=str)
+    # head = request.headers
+    # addr = request.remote_addr
+    # content_len = request.content_length
+    # req_date = request.date
+    # ret = {}
+    # print(addr)
+    # print(content_len)
+    # print(req_date)
+    # print(request.content_md5)
+    # return json.dumps(ret, default=str)
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
+app.run(host='127.0.0.1', port=8080)
