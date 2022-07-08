@@ -1,6 +1,16 @@
 # Intelli-Warehouse
 Design &amp; Build warehouse monitoring system
 
+## Requirements
+1. flask
+2. pymysql
+
+## How to run
+```shell
+cd Warehouse
+python3 app.py
+```
+打开浏览器输入 `http://127.0.0.1:5000/`
 
 ## 数据库说明
 
