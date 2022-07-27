@@ -1,0 +1,192 @@
+<!doctype html>
+<html class="x-admin-sm">
+    <head>
+        <meta charset="UTF-8">
+        <title>后台登录-X-admin2.2</title>
+        <meta name="renderer" content="webkit|ie-comp|ie-stand">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+        <!-- <meta http-equiv="Cache-Control" content="no-siteapp" /> -->
+
+        <link rel="stylesheet" href="../../static/CSS/ratio.css">
+        <link rel="stylesheet" href="../../static/CSS/layui/font.css">
+        <link rel="stylesheet" href="../../static/CSS/layui/xadmin.css">
+        <script src="../../static/lib/layui/layui.js" charset="utf-8"></script>
+        <script type="text/javascript" src="../../static/js/xadmin.js"></script>
+    </head>
+    <body>
+        <main>
+
+        </main>
+
+        <div class="layui-fluid">
+     
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-sm12 layui-col-md24">
+                    <div class="layui-card">
+                        <div class="layui-card-header">不同类别货物比例 / 数量情况</div>
+                        <div class="layui-card-body" style="min-height: 680px;">
+
+                            <div class="houseid">
+                                <label for="">仓库号 (houseId):</label>
+                                <input type="text" id="houseid">
+                            </div>
+
+                            <div class="layui-inline layui-show-xs-block">
+                                <button class="reseach" id='reseach' lay-submit="" lay-filter="sreach">
+                                    <i class="layui-icon">&#xe615;</i></button>
+                            </div>
+
+                            <div id="main3" class="layui-col-sm12" style="height: 600px;"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js"></script>
+        <!-- <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/extension/bmap.min.js"></script> -->
+        <script type="text/javascript">
+        
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main3'));
+        // 指定图表的配置项和数据
+        var option = {
+            tooltip : {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+            legend: {
+                orient: 'vertical',
+                left: 'left',
+                data: ['货物类别1','货物类别2','货物类别3','货物类别4','货物类别5']
+            },
+            series : [
+                {
+                    name: '访问来源',
+                    type: 'pie',
+                    radius : '55%',
+                    center: ['50%', '60%'],
+                    data:[
+                        // {value:335, name:'货物类别1'},
+                        // {value:310, name:'货物类别2'},
+                        // {value:234, name:'货物类别3'},
+                        // {value:135, name:'货物类别4'},
+                        // {value:1548, name:'货物类别5'}
+                        {value:335, name:'货物类别1'},
+                        {value:310, name:'货物类别2'},
+                        {value:234, name:'货物类别3'},
+                        {value:135, name:'货物类别4'},
+                        {value:1548, name:'货物类别5'}                        
+                    ],
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+        </script>
+
+
+        <script>
+            let reseachBtn = document.querySelector('.reseach')
+            let houseidInp = document.querySelector('#houseid')
+
+            function showGraph(data){
+                var myChart = echarts.init(document.getElementById('main3'));
+                // 指定图表的配置项和数据
+                var option = {
+                    tooltip : {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b} : {c} ({d}%)"
+                    },
+                    legend: {
+                        orient: 'vertical',
+                        left: 'left',
+                        data: ['货物类别1','货物类别2','货物类别3','货物类别4','货物类别5']
+                    },
+                    series : [
+                        {
+                            name: '访问来源',
+                            type: 'pie',
+                            radius : '55%',
+                            center: ['50%', '60%'],
+                            data:[
+                                // {value:335, name:'货物类别1'},
+                                // {value:310, name:'货物类别2'},
+                                // {value:234, name:'货物类别3'},
+                                // {value:135, name:'货物类别4'},
+                                // {value:1548, name:'货物类别5'}
+                                {value:data['total']['g1'], name:'货物类别1'},
+                                {value:data['total']['g2'], name:'货物类别2'},
+                                {value:data['total']['g3'], name:'货物类别3'},
+                                {value:data['total']['g4'], name:'货物类别4'},
+                                {value:data['total']['g5'], name:'货物类别5'}
+                            ],
+                            itemStyle: {
+                                emphasis: {
+                                    shadowBlur: 10,
+                                    shadowOffsetX: 0,
+                                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                }
+                            }
+                        }
+                    ]
+                };
+                // 使用刚指定的配置项和数据显示图表。
+                myChart.setOption(option);                
+            }
+
+
+
+            reseachBtn.onclick = () => {
+                let requireData = {
+                    type: 'now',
+                    houseId: houseidInp.value
+                }
+
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "http://127.0.0.1:5000/inquire", true);
+                xhr.setRequestHeader('content-type', 'application/json');
+
+                //将用户输入值序列化成字符串
+                xhr.send(JSON.stringify(requireData));
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        //根据服务器的响应内容格式处理响应结果
+                        var res = JSON.parse(xhr.responseText);
+                        console.log(res)
+                        if (res.status === 0) {
+                            let data = res.result
+                            showGraph(data)
+                            // console.log(data['C']['g1'])
+                            // let newInnerHTML = generInnerHtml(data, title)
+                            // tableObj.innerHTML = newInnerHTML
+                        } else {
+                            alert('未查询到相关记录')
+                        }
+                    } else {
+                        alert('查询失败')
+                    }
+                }
+            }        
+        </script>
+
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+          var s = document.getElementsByTagName("script")[0]; 
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+    </body>
+</html>

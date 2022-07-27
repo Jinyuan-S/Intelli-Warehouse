@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html class="x-admin-sm">
+    
+    <head>
+        <meta charset="UTF-8">
+        <title>欢迎页面-X-admin2.2</title>
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+        <link rel="stylesheet" href="../../static/CSS/layui/font.css">
+        <link rel="stylesheet" href="../../static/CSS/layui/xadmin.css">
+        <script type="text/javascript" src="../../static/lib/layui/layui.js" charset="utf-8"></script>
+        <script type="text/javascript" src="../../static/js/xadmin.js"></script>
+        <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+        <!--[if lt IE 9]>
+            <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+            <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <div class="layui-fluid">
+            <div class="layui-row">
+                <form class="layui-form">
+                    <div class="layui-form-item">
+                        <label for="" class="layui-form-label">
+                            账号：</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="id" name="email" required="" class="layui-input" disabled></div>
+                        <div class="layui-form-mid layui-word-aux">
+                            <span class="x-red">*</span>
+                            账号ID是您的唯一标识，独一无二且不可更改</div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label for="" class="layui-form-label">
+                            名：</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="fName" name="email" required="" class="layui-input" disabled>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label for="" class="layui-form-label">
+                            姓：</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="lname" name="email" required="" class="layui-input" disabled>
+                        </div>
+                    </div>
+                    <!-- <div class="layui-form-item">
+                        <label for="" class="layui-form-label">
+                            性别：</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="" name="email" required="" class="layui-input" disabled>
+                        </div>
+                    </div> -->
+                    <div class="layui-form-item">
+                        <label for="" class="layui-form-label">
+                            注册日期：</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="doB" name="email" required="" class="layui-input" disabled>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label for="" class="layui-form-label">
+                            管理员：</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="managerId" name="email" required="" class="layui-input" disabled>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <script>
+        let idObj = document.querySelector('#id')
+        let backBtn = document.querySelector('.back')
+        let fNameObj = document.querySelector('#fName')
+        let lNameObj = document.querySelector('#lName')
+        let doBObj = document.querySelector('#doB')
+        // let manObj = document.querySelector('#man')
+        // let womanObj = document.querySelector('#woman')
+        let managerIdObj = document.querySelector('#managerId')
+        idObj.value = localStorage.getItem('workerId')
+        // idObj.value = "123456"
+        fNameObj.value = localStorage.getItem('fName')
+        lNameObj.value = localStorage.getItem('lName')
+        doBObj.value = localStorage.getItem('doB')
+        managerIdObj.value = localStorage.getItem('managerId')
+        </script>
+    </body>        
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html class="x-admin-sm">
+    <head>
+        <meta charset="UTF-8">
+        <title>欢迎页面-X-admin2.2</title>
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+        <link rel="stylesheet" href="../CSS/layui/xadmin.css">
+        <script src="../lib/layui/layui.js" charset="utf-8"></script>
+        <script type="text/javascript" src="../js/xadmin.js"></script>
+        <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+        <!--[if lt IE 9]>
+          <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+          <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <div class="layui-fluid">
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-body ">
+                            <blockquote class="layui-elem-quote">欢迎您的使用!  当前时间为：
+                                
+                                <!-- <span class="x-red">test</span>！当前时间:2018-04-25 20:50:53 -->           
+                                <div id="datetime">
+                                    <script>setInterval("document.getElementById('datetime').innerHTML=new Date().toLocaleString();", 1000);</script>
+                                </div>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-header">数据统计</div>
+                        <div class="layui-card-body ">
+                            <ul class="layui-row layui-col-space10 layui-this x-admin-carousel x-admin-backlog">
+                                <li class="layui-col-md2 layui-col-xs6">
+                                    <a href="javascript:;" class="x-admin-backlog-body">
+                                        <h3>文章数</h3>
+                                        <p>
+                                            <cite>66</cite></p>
+                                    </a>
+                                </li>
+                                <li class="layui-col-md2 layui-col-xs6">
+                                    <a href="javascript:;" class="x-admin-backlog-body">
+                                        <h3>会员数</h3>
+                                        <p>
+                                            <cite>12</cite></p>
+                                    </a>
+                                </li>
+                                <li class="layui-col-md2 layui-col-xs6">
+                                    <a href="javascript:;" class="x-admin-backlog-body">
+                                        <h3>回复数</h3>
+                                        <p>
+                                            <cite>99</cite></p>
+                                    </a>
+                                </li>
+                                <li class="layui-col-md2 layui-col-xs6">
+                                    <a href="javascript:;" class="x-admin-backlog-body">
+                                        <h3>商品数</h3>
+                                        <p>
+                                            <cite>67</cite></p>
+                                    </a>
+                                </li>
+                                <li class="layui-col-md2 layui-col-xs6">
+                                    <a href="javascript:;" class="x-admin-backlog-body">
+                                        <h3>文章数</h3>
+                                        <p>
+                                            <cite>67</cite></p>
+                                    </a>
+                                </li>
+                                <li class="layui-col-md2 layui-col-xs6 ">
+                                    <a href="javascript:;" class="x-admin-backlog-body">
+                                        <h3>文章数</h3>
+                                        <p>
+                                            <cite>6766</cite></p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-sm6 layui-col-md3">
+                    <div class="layui-card">
+                        <div class="layui-card-header">下载
+                            <span class="layui-badge layui-bg-cyan layuiadmin-badge">月</span></div>
+                        <div class="layui-card-body  ">
+                            <p class="layuiadmin-big-font">33,555</p>
+                            <p>新下载
+                                <span class="layuiadmin-span-color">10%
+                                    <i class="layui-inline layui-icon layui-icon-face-smile-b"></i></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-sm6 layui-col-md3">
+                    <div class="layui-card">
+                        <div class="layui-card-header">下载
+                            <span class="layui-badge layui-bg-cyan layuiadmin-badge">月</span></div>
+                        <div class="layui-card-body ">
+                            <p class="layuiadmin-big-font">33,555</p>
+                            <p>新下载
+                                <span class="layuiadmin-span-color">10%
+                                    <i class="layui-inline layui-icon layui-icon-face-smile-b"></i></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-sm6 layui-col-md3">
+                    <div class="layui-card">
+                        <div class="layui-card-header">下载
+                            <span class="layui-badge layui-bg-cyan layuiadmin-badge">月</span></div>
+                        <div class="layui-card-body ">
+                            <p class="layuiadmin-big-font">33,555</p>
+                            <p>新下载
+                                <span class="layuiadmin-span-color">10%
+                                    <i class="layui-inline layui-icon layui-icon-face-smile-b"></i></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-sm6 layui-col-md3">
+                    <div class="layui-card">
+                        <div class="layui-card-header">下载
+                            <span class="layui-badge layui-bg-cyan layuiadmin-badge">月</span></div>
+                        <div class="layui-card-body ">
+                            <p class="layuiadmin-big-font">33,555</p>
+                            <p>新下载
+                                <span class="layuiadmin-span-color">10%
+                                    <i class="layui-inline layui-icon layui-icon-face-smile-b"></i></span>
+                            </p>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-header">系统信息</div>
+                        <div class="layui-card-body ">
+                            <table class="layui-table">
+                                <tbody>
+                                    <tr>
+                                        <th>xxx版本</th>
+                                        <td>1.3</td></tr>
+                                    <tr>
+                                        <th>服务器地址</th>
+                                        <td>https://webvpn.bupt.edu.cn      ssh://10.99.0.20:22</td></tr>
+                                    <tr>
+                                        <th>操作系统</th>
+                                        <td>WINNT</td></tr>
+                                    <tr>
+                                        <th>运行环境</th>
+                                        <td>Apache/2.4.23 (Win32) OpenSSL/1.0.2j mod_fcgid/2.3.9</td></tr>
+                                    <tr>
+                                        <th>PHP版本</th>
+                                        <td>5.6.27</td></tr>
+                                    <tr>
+                                        <th>PHP运行方式</th>
+                                        <td>cgi-fcgi</td></tr>
+                                    <tr>
+                                        <th>MYSQL版本</th>
+                                        <td>5.5.53</td></tr>
+                                    <tr>
+                                        <th>ThinkPHP</th>
+                                        <td>5.0.18</td></tr>
+                                    <tr>
+                                        <th>上传附件限制</th>
+                                        <td>2M</td></tr>
+                                    <tr>
+                                        <th>执行时间限制</th>
+                                        <td>30s</td></tr>
+                                    <!-- <tr>
+                                        <th>剩余空间</th>
+                                        <td>86015.2M</td></tr> -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-header">开发团队</div>
+                        <div class="layui-card-body ">
+                            <table class="layui-table">
+                                <tbody>
+                                    <tr>
+                                        <th>UI界面版权所有</th>
+                                        <td>xuebingsi
+                                            <a href="http://x.xuebingsi.com/" target="_blank">访问官网</a><br>
+                                            张越凯 2020213666@bupt.edu.cn
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>D&B小学期物联网47组成员</th>
+                                        <td>孙锦元，苏可欣，张越凯</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <style id="welcome_style"></style>
+                <div class="layui-col-md12">
+                    <blockquote class="layui-elem-quote layui-quote-nm">感谢layui, Echarts, jquery。<br>
+                        本系统由x-admin提供技术支持，虽然它已经在三年之前就已经停止维护了，但仍然感谢x-admin对作者的启发和示范<br>
+                        系统界面使用的背景图均已得到创作者授权，画师账号： https://www.pixiv.net/users/33558705 <br>
+                        本系统界面仅供学习练习使用，不用于任何商务和盈利用途。如有侵权内容，请发邮件告知作者 2020213666@bupt.edu.cn 张越凯，我会在核实后第一时间排除侵害
+                    </blockquote></div>
+            </div>
+        </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,41 @@
+body {
+
+    /* background:rgba(33, 149, 243, 0.3) !important; */
+    /* height:70%; */
+
+    /* background:rgb(238, 238, 238) !important;
+    padding: 0;
+    margin: 0;
+    display: flex;
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; */
+}
+
+
+header>button {
+    width: 150px;
+    /* background-color: rgb(81, 147, 240); */
+    background-color: #184effba;
+    border-radius:2px;
+    border: 0 none;
+    color: white;
+    /* height: 90%;
+    vertical-align:bottom; */
+}
+
+
+.reseach{
+    width: 70px;
+    height: 30px;
+    /* right:100px; */
+}
+
+main {
+    /* width: 1200px; */
+    background-color: #fff;
+    min-height: 10px;
+}
+
+

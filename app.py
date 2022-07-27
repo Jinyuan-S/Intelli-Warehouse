@@ -7,24 +7,50 @@ db_info = {'user': 'root', 'password': 'Cqmyg1sdss', 'host': '127.0.0.1', 'datab
 db = Database(db_info)
 
 
-@app.route('/')
+@app.route('/home')
 def hello_world():  # put application's code here
-    return render_template('new/login/index.html')
+    return render_template('html/index.html')
 
+@app.route('/home/homepage')
+def ret_home_homepage():  # put application's code here
+    return render_template('html/homePage.html')
+
+@app.route('/home/robot')
+def ret_home_robot():
+    return render_template('html/robot.html')
+
+@app.route('/home/ratio')
+def ret_home_ratio():
+    return render_template('html/ratio.html')
+
+@app.route('/home/variation')
+def ret_home_variation():
+    return render_template('html/variation.html')
 
 @app.route('/records')
 def ret_records():
-    return render_template('new/records/index.html')
+    return render_template('html/records.html')
 
+@app.route('/login')
+def ret_login():
+    return render_template('html/logIn.html')
+
+@app.route('/login/changePwd')
+def ret_login_changePw():
+    return render_template('html/changePwd1.html')
+
+@app.route('/main/info')
+def ret_main_popinfo():
+    return render_template('html/info.html')
 
 @app.route('/changeInfo')
 def ret_changeInfo():
-    return render_template('new/changeInfo/index.html')
+    return render_template('html/changeInfo.html')
 
 
 @app.route('/changePwd')
 def ret_changePwd():
-    return render_template('new/changePwd/index.html')
+    return render_template('html/changePwd2.html')
 
 @app.route('/user', methods=['POST'])
 def user():
@@ -62,6 +88,8 @@ def user():
         rows, user_info = db.query('SELECT * FROM Worker WHERE workerId="%s"' % (req['id']))
         ret['status'] = 0
         ret['result'] = user_info[0]  # 返回更新后的信息
+
+    print(ret)
     return json.dumps(ret, default=str)
 
 
@@ -100,6 +128,7 @@ def inquire():
             records = expand(records)
             ret['status'] = 0
             ret['result'] = records
+    print(ret)
     return json.dumps(ret, default=str)
 
 

@@ -20,7 +20,7 @@ send_data = [1, ["A", 2, 0, 0, 0, 0], ["B", 0, 1, 1, 0, 0], ["C", 0, 0, 0, 1, 3]
                ["F", 1, 0, 0, 0, 0], ["G", 0, 0, 1, 2, 3], ["H", 0, 0, 0, 0, 0], ["I", 1, 0, 2, 0, 0],
                ["J", 1, 1, 1, 1, 1],
                ["all", 5, 4, 7, 4, 7]]
-r = requests.post("http://127.0.0.1:5000/uplode", json=send_data)
+r = requests.post("http://127.0.0.1:5000/upload", json=send_data)
 print(r.text)
 thing = json.loads(r.text)
 print(thing)
