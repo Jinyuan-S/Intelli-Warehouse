@@ -4,7 +4,7 @@ body {
     background:rgb(238, 238, 238) !important;
     padding: 0;
     margin: 0;
-    display: flex;
+    /* display: flex; */
     /* height:70%; */
     flex-direction: column;
     justify-content: center;
@@ -13,7 +13,7 @@ body {
 
 header {
     width: 1200px;
-    height: 40px;
+    height: 27px;
     display: flex;
     background-color: rgb(238, 238, 238);
     position: relative;
@@ -23,11 +23,17 @@ header>button {
     width: 150px;
     /* background-color: rgb(81, 147, 240); */
     background-color: #184effba;
-    border-radius:2px;
+    border-radius:5px;
     border: 0 none;
     color: white;
+    height:43px;
+    margin: 3px;
     /* height: 90%;
     vertical-align:bottom; */
+}
+
+blank{
+    height: 20px;
 }
 
 .user {
@@ -36,6 +42,10 @@ header>button {
     height: 100%;
     border: none;
     width: auto;
+}
+
+h1 {
+    height: 100%;
 }
 
 .reseach{

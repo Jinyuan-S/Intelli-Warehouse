@@ -2,13 +2,17 @@
 <html class="x-admin-sm">
     <head>
         <meta charset="UTF-8">
-        <title>欢迎页面-X-admin2.2</title>
+        <title>关于我们</title>
         <meta name="renderer" content="webkit">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
-        <link rel="stylesheet" href="../CSS/layui/xadmin.css">
+        <!-- <link rel="stylesheet" href="../CSS/layui/xadmin.css">
         <script src="../lib/layui/layui.js" charset="utf-8"></script>
-        <script type="text/javascript" src="../js/xadmin.js"></script>
+        <script type="text/javascript" src="../js/xadmin.js"></script> -->
+        <!-- <link rel="stylesheet" href="../../static/CSS/layui/font.css"> -->
+        <link rel="stylesheet" href="../../static/CSS/layui/xadmin.css">
+        <script src="../../static/lib/layui/layui.js" charset="utf-8"></script>
+        <script type="text/javascript" src="../../static/js/xadmin.js"></script>
         <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
         <!--[if lt IE 9]>
           <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
@@ -16,6 +20,16 @@
         <![endif]-->
     </head>
     <body>
+        <div class="x-nav" style="width:98%">
+            <span class="layui-breadcrumb">
+                <a href="">主界面</a>
+                <a href="">其他信息</a>
+                <a><cite>关于我们</cite></a>
+            </span>
+            <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="location.reload()" title="刷新">
+                <i class="layui-icon layui-icon-refresh" style="line-height:30px; top:50%; margin:auto;"></i>
+            </a>
+        </div>
         <div class="layui-fluid">
             <div class="layui-row layui-col-space15">
                 <div class="layui-col-md12">
@@ -141,11 +155,11 @@
                             <table class="layui-table">
                                 <tbody>
                                     <tr>
-                                        <th>xxx版本</th>
-                                        <td>1.3</td></tr>
+                                        <th>当前版本</th>
+                                        <td>1.3.2</td></tr>
                                     <tr>
                                         <th>服务器地址</th>
-                                        <td>https://webvpn.bupt.edu.cn      ssh://10.99.0.20:22</td></tr>
+                                        <td>https://webvpn.bupt.edu.cn      <br/>ssh://10.99.0.20:22</td></tr>
                                     <tr>
                                         <th>操作系统</th>
                                         <td>WINNT</td></tr>
@@ -199,15 +213,19 @@
                         </div>
                     </div>
                 </div>
-                <style id="welcome_style"></style>
                 <div class="layui-col-md12">
-                    <blockquote class="layui-elem-quote layui-quote-nm">感谢layui, Echarts, jquery。<br>
-                        本系统由x-admin提供技术支持，虽然它已经在三年之前就已经停止维护了，但仍然感谢x-admin对作者的启发和示范<br>
-                        系统界面使用的背景图均已得到创作者授权，画师账号： https://www.pixiv.net/users/33558705 <br>
-                        本系统界面仅供学习练习使用，不用于任何商务和盈利用途。如有侵权内容，请发邮件告知作者 2020213666@bupt.edu.cn 张越凯，我会在核实后第一时间排除侵害
-                    </blockquote></div>
+                    <div class="layui-card">
+                        <div class="layui-card-body ">
+                            <blockquote class="layui-elem-quote">感谢layui, Echarts, jquery。<br>
+                                本系统初版主体界面没有使用任何框架，本版本修改了layui和x-admin的部分内容和风格，并基于此添加了左侧导航栏，进行了对原页面的整合与优化。<br>
+                                ajax和动态表格是基于layui和layui官方文档的技术支持制作的<br/>
+                                此外，虽然x-admin已经在三年之前就已经停止维护了，并且作者从x-admin获得的支持也较为有限，但仍然感谢x-admin对作者的启发与示范<br>
+                                本系统界面仅供学习练习使用，不用于任何商务和盈利用途。如有侵权内容，请发邮件告知作者 2020213666@bupt.edu.cn 张越凯，我会在核实后第一时间排除侵害
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
         </div>
     </body>
 </html>

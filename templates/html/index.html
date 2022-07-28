@@ -10,12 +10,12 @@
     <meta name="viewport"
         content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
-{#    <link rel="stylesheet" href="../CSS/layui/font.css">#}
-{#    <link rel="stylesheet" href="../CSS/layui/xadmin.css">#}
-{#    <link rel="stylesheet" href="../CSS/layui/theme5.css">#}
     <link rel="stylesheet" href="{{ url_for('static', filename = 'CSS/layui/font.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename = 'CSS/layui/xadmin.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename = 'CSS/layui/theme5.css') }}">
+    <link rel="stylesheet" href="../../static/CSS/layui/font.css">
+    <link rel="stylesheet" href="../../static/CSS/layui/xadmin.css">
+    <link rel="stylesheet" href="../../static/CSS/layui/theme5.css">
 
     <script src="../../static/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="../../static/js/xadmin.js"></script>
@@ -118,8 +118,11 @@
                     </a>
                     <ul class="sub-menu">
                         <li>
-                            <a onclick="xadmin.add_tab('详细查询','/records')">
-                                <cite>详细查询</cite>
+                            <a onclick="xadmin.add_tab('当前数据','/records')">
+                                <cite>当前数据</cite>
+                            </a>
+                            <a onclick="xadmin.add_tab('时段数据','/recordsPeriod')">
+                                <cite>时段数据</cite>
                             </a>
                         </li>
                     </ul>          

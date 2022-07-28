@@ -5,7 +5,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../../static/CSS/records.css">
+        <!-- <link rel="stylesheet" href="../../static/CSS/records.css"> -->
 
         <link rel="stylesheet" href="../../static/CSS/layui/font.css">
         <link rel="stylesheet" href="../../static/CSS/layui/xadmin.css">
@@ -13,442 +13,329 @@
         <script type="text/javascript" src="../../static/js/xadmin.js"></script>
         <!-- <link rel="stylesheet" href="{{ url_for('static', filename = 'css/records/index.css') }}"> -->
         <title>数据查询</title>
-
-        <!-- <style>
-            div{
-                display: inline-block;
-            }
-        </style> -->
     </head>
 
-    <body>
-        <!-- <div class="x-nav" style="width:100%"> -->
-        <div class="x-nav">
-            <span class="layui-breadcrumb">
-                <a href="">主界面</a>
-                <a href="">数据查询</a>
-                <a><cite>详细查询</cite></a>
-            </span>
-            <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="location.reload()" title="刷新">
-                <i class="layui-icon layui-icon-refresh" style="line-height:30px; top:50%; margin:auto;"></i>
-            </a>
-        </div>
-
-        <header>
-            <button class="now" style="margin-left:18px;cursor: pointer">当前仓库信息</button>
-            <button class="interval" style="margin-left:10px;cursor: pointer">一段时间内仓库信息</button>
-            <!-- <button class="user">个人信息</button> -->
-        </header>
-
-
-
-
-        <div class="layui-fluid">
-            <div class="layui-row layui-col-space15">
-                <div class="layui-col-md12">
-                    <div class="layui-card" text-align: center>
-
-                        <div class="layui-card-header" text-align: center>
-                            <div class="blank"></div>
-                            <h1 align="center" margin-top:10px>当前仓库信息查询</h1>
-                            <!-- <hr/> -->
+        <body>
+            <div class="x-nav" style="width:98%">
+            <!-- <div class="x-nav"> -->
+                <span class="layui-breadcrumb">
+                    <a href="">主界面</a>
+                    <a href="">数据查询</a>
+                    <a><cite>当前数据</cite></a>
+                </span>
+                <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="location.reload()" title="刷新">
+                    <i class="layui-icon layui-icon-refresh" style="line-height:30px; top:50%; margin:auto;"></i>
+                </a>
+            </div>
+    
+            <!-- <header>
+                <button class="now" style="margin-left:18px;cursor: pointer">当前仓库信息</button>
+                <button class="interval" style="margin-left:10px;cursor: pointer">一段时间内仓库信息</button>
+            </header> -->
+    
+    
+            <div class="layui-fluid">
+                <div class="layui-row layui-col-space15">
+                    <div class="layui-col-md12">
+                        <div class="layui-card" text-align: center>
+    
+                            <div>
+                                <br/>
+                                <h1 align="center" margin-top: 50px>当前仓库信息查询</h1>
+                            </div>
+    
+    
+                            <div class="layui-card-body ">
+                                <form class="layui-form layui-col-space5">
+                                    <!-- <div class="layui-inline layui-show-xs-block">
+                                        <input class="layui-input" autocomplete="off" placeholder="开始日" name="start" id="start"></div>
+                                    <div class="layui-inline layui-show-xs-block">
+                                        <input class="layui-input" autocomplete="off" placeholder="截止日" name="end" id="end"></div> -->
+                                    <div class="layui-inline layui-show-xs-block">
+                                        <input type="text" name="username" placeholder="请输入仓库号" autocomplete="off" class="layui-input" id="houseidText"></div>
+                                    <div class="layui-inline layui-show-xs-block">
+                                        <button class="layui-btn" lay-submit="" lay-filter="sreach" id="reseach" onclick>
+                                            <i class="layui-icon">&#xe615;</i></button>
+                                    </div>
+                                </form>
+                            </div>
+    
+    
+                            <!-- 表格 -->
+                            <div class="layui-card-body ">
+                                <table class="layui-table" id="demo" lay-filter="test"></table>
+                                <!-- <table class="layui-hide" id="demo" lay-filter="test"></table> -->
+                            </div>
+    
                         </div>
-
-                        <div class="layui-card-body ">
-                            <form class="layui-form layui-col-space5">
-                                <!-- <div class="layui-inline layui-show-xs-block">
-                                    <input class="layui-input" autocomplete="off" placeholder="开始日" name="start" id="start"></div>
-                                <div class="layui-inline layui-show-xs-block">
-                                    <input class="layui-input" autocomplete="off" placeholder="截止日" name="end" id="end"></div> -->
-                                <div class="layui-inline layui-show-xs-block">
-                                    <input type="text" name="username" placeholder="请输入仓库号" autocomplete="off" class="layui-input" id="houseid"></div>
-                                <div class="layui-inline layui-show-xs-block">
-                                    <button class="layui-btn" lay-submit="" lay-filter="sreach" id="reseach" onclick>
-                                        <i class="layui-icon">&#xe615;</i></button>
-                                </div>
-                            </form>
-                        </div>
-
-
-
-
-
-                        <!-- 表格 -->
-                        <div class="layui-card-body ">
-                            <table class="layui-table" id="demo" lay-filter="test"></table>
-                        </div>
-
                     </div>
                 </div>
             </div>
-        </div>
-    </body>
-
-
-
+        </body>
     
-    <script type="text/html" id="toolbarDemo">
-        <div class = "layui-btn-container" > 
-            <button class = "layui-btn" lay-event = "getCheckData" > 获取选中行数据 </button>
-            <button class="layui-btn" lay-event="getCheckLength">获取选中数目</button > 
-            <button class = "layui-btn" lay-event = "isAll" > 验证是否全选</button>
-            <button class="layui-btn" onclick="xadmin.open('添加用户','./recordAdd.html',800,600)">
-                <i class="layui-icon"></i>添加</button>
-            <button class="layui-btn layui-btn-danger" onclick="delAll()">
-                <i class="layui-icon"></i>批量删除</button>
-        </div > 
-    </script>
-
-
-    <script>layui.use('table',
-        function() {
-            var table = layui.table;
-
-            //监听单元格编辑
-            table.on('edit(test)',
-            function(obj) {
-                var value = obj.value //得到修改后的值
-                ,
-                data = obj.data //得到所在行所有键值
-                ,
-                field = obj.field; //得到字段
-                layer.msg('[ID: ' + data.id + '] ' + field + ' 字段更改为：' + value);
-            });
-
+    
+    
+        
+        <script type="text/html" id="toolbarDemo">
+            <!-- 头工具栏按钮 -->
+            <div class = "layui-btn-container" >
+                <!-- <button class="layui-btn layui-btn-sm" lay-event="getData">获取当前页数据</button> -->
+                <!-- <button class="layui-btn" lay-event="getData">获取当前页数据</button> -->
+                <button class = "layui-btn" lay-event = "getCheckData" > 获取选中行数据 </button>
+                <button class="layui-btn" lay-event="getCheckLength">获取选中数目</button> 
+                <button class = "layui-btn" lay-event = "isAll" > 验证是否全选</button>
+                <button class="layui-btn" onclick="xadmin.open('添加用户','./recordAdd.html',800,600)">
+                    <i class="layui-icon"></i>添加</button>
+                <button class="layui-btn layui-btn-danger" lay-event ="delAll">
+                    <i class="layui-icon"></i>批量删除</button>
+            </div > 
+        </script>
+    
+    
+        <script>
             //头工具栏事件
-            table.on('toolbar(test)',
-            function(obj) {
-                var checkStatus = table.checkStatus(obj.config.id);
-                switch (obj.event) {
-                case 'getCheckData':
-                    var data = checkStatus.data;
-                    layer.alert(JSON.stringify(data));
-                    break;
-                case 'getCheckLength':
-                    var data = checkStatus.data;
-                    layer.msg('选中了：' + data.length + ' 个');
-                    break;
-                case 'isAll':
-                    layer.msg(checkStatus.isAll ? '全选': '未全选');
-                    break;
-                };
-            });
-        });
-    </script>
-
-    <!-- 展示用的实例化函数 -->
-    <script>
-        var a=[
-        {"shelfNo": 23
-            ,"houseId": 1
-            , "datetime": "2022-07-06 17:31:46"
-            , "position": "A"
-            , "recordNo": 5
-            , "g1": 2
-            , "g2": 0
-            , "g3": 0
-            , "g4": 0
-            , "g5": 0
-            },
-            {"shelfNo": 24
-            ,"houseId": 1
-            , "datetime": "2022-07-06 17:31:46"
-            , "position": "B"
-            , "recordNo": 5
-            , "g1": 0
-            , "g2": 1
-            , "g3": 1
-            , "g4": 0
-            , "g5": 0
-            },
-            {"shelfNo": 25
-            ,"houseId": 1
-            , "datetime": "2022-07-06 17:31:46"
-            , "position": "C"
-            , "recordNo": 5
-            , "g1": 0
-            , "g2": 0
-            , "g3": 0
-            , "g4": 1
-            , "g5": 3
-            },
-            {"shelfNo": 26
-            ,"houseId": 1
-            , "datetime": "2022-07-06 17:31:46"
-            , "position": "D"
-            , "recordNo": 5
-            , "g1": 0
-            , "g2": 2
-            , "g3": 0
-            , "g4": 0
-            , "g5": 0
-            },
-            {"shelfNo": 27
-            ,"houseId": 1
-            , "datetime": "2022-07-06 17:31:46"
-            , "position": "E"
-            , "recordNo": 5
-            , "g1": 0
-            , "g2": 0
-            , "g3": 2
-            , "g4": 0
-            , "g5": 0
-            },
-            {"shelfNo": 28
-            ,"houseId": 1
-            , "datetime": "2022-07-06 17:31:46"
-            , "position": "F"
-            , "recordNo": 5
-            , "g1": 1
-            , "g2": 0
-            , "g3": 0
-            , "g4": 0
-            , "g5": 0
-            },
-            {"shelfNo": 29
-            ,"houseId": 1
-            , "datetime": "2022-07-06 17:31:46"
-            , "position": "G"
-            , "recordNo": 5
-            , "g1": 0
-            , "g2": 0
-            , "g3": 1
-            , "g4": 2
-            , "g5": 3
-            },
-            {"shelfNo": 30
-            ,"houseId": 1
-            , "datetime": "2022-07-06 17:31:46"
-            , "position": "H"
-            , "recordNo": 5
-            , "g1": 0
-            , "g2": 0
-            , "g3": 0
-            , "g4": 0
-            , "g5": 0
-            },
-            {"shelfNo": 31
-            ,"houseId": 1
-            , "datetime": "2022-07-06 17:31:46"
-            , "position": "I"
-            , "recordNo": 5
-            , "g1": 1
-            , "g2": 0
-            , "g3": 2
-            , "g4": 0
-            , "g5": 0
-            },
-            {"shelfNo": 32
-            ,"houseId": 1
-            , "datetime": "2022-07-06 17:31:46"
-            , "position": "J"
-            , "recordNo": 5
-            , "g1": 1
-            , "g2": 1
-            , "g3": 1
-            , "g4": 1
-            , "g5": 1
-            },
-            // {"shelfNo": 33
-            // ,"houseId": 1
-            // , "datetime": "2022-07-06 17:31:46"
-            // , "position": "all"
-            // , "recordNo": 5
-            // , "g1": 1
-            // , "g2": 0
-            // , "g3": 0
-            // , "g4": 0
-            // , "g5": 0
-            // },
-        ]
-        function exampleTable(){
-            showTable(a)
-        }
-    </script>
+            layui.use('table',
+                function() {
+                    var table = layui.table;
+                    table.on('toolbar(test)',
+                    function(obj) {
+                        var checkStatus = table.checkStatus(obj.config.id);
+                        switch (obj.event) {
+                        case 'getCheckData':
+                            var data = checkStatus.data;
+                            layer.alert(JSON.stringify(data));
+                            break;
+                        case 'getCheckLength':
+                            var data = checkStatus.data;
+                            layer.msg('选中了：' + data.length + ' 条记录');
+                            break;
+                        case 'isAll':
+                            layer.msg(checkStatus.isAll ? '已全选': '未全选');
+                            break;
+                        case 'delAll':
+                            layer.confirm('确认要删除吗？', function(index){
+                                // table.checkStatus(obj.config.id).data.del();
+                                $(".layui-form-checked").not('.header').parents('tr').remove();
+                                layer.close(index);
+                            }
+                            );
+                            break;
+                        };
+                    });
+                }
+            );
+        </script>
+        
     
-    <script>
-    function showTable(a){
-    layui.use('table', function(){
-        // var $ = layui.$;
-        var table = layui.table;
-        var b="总计";
-        // 直接赋值数据
-        table.render({
-            elem: '#demo'
-            //,width: 900
-            //,height: 274
-            ,cols: [[ //标题栏
-                {type: 'checkbox', title: '选中', width:30,LAY_CHECKED: true},
-                {field: 'shelfNo', title: '记录ID', width: 90, sort: true, totalRowText:"本页总计"},
-                {field: 'datetime', title: '时间', width: 190,sort: true,},
-                {field: 'houseId', title: '仓库', width: 73, sort: true,},
-                {field: 'position', title: '货架', width: 73,sort: true,},
-                {field: 'recordNo', title: '批次', width: 73, sort: true,},
-                {field: 'g1', title: '物品1', width: 66, totalRow: true},
-                {field: 'g2', title: '物品2', width: 66, totalRow: true},
-                {field: 'g3', title: '物品3', width: 66, totalRow: true},
-                {field: 'g4', title: '物品4', width: 66, totalRow: true},
-                {field: 'g5', title: '物品5', width: 66, totalRow: true},
-                //{field: 'experience', title: '积分', width: 80, sort: true},
-            ]]
-        ,data: a
-        ,skin: 'row' //表格风格
-        ,even: true
-        //,size: 'lg' //尺寸
-        ,toolbar:true
-        ,toolbar: '#toolbarDemo'
-        ,page: true //是否显示分页
-        ,limits: [10,50,1000]
-        ,limit: 11 //每页默认显示的数量
-        ,totalRow: true
-        //,loading: false //请求数据时，是否显示loading
-      });
-      
-            var $ = layui.jquery, active = {
-                parseTable: function(){
-                table.init('parse-table-demo', {
-                    limit: 3
+        <script type="text/html" id="btn">
+            <!-- 这是表格每行的按钮，要绑在表格上，然后匹配事件 -->
+            <!-- <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a> -->
+            <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+        </script>
+    
+        <script>
+    
+        </script>
+        
+        
+        <script>
+            // 根据给出的数据a来显示表格
+            function showTable(a){
+            layui.use('table', function(){
+                var table = layui.table;
+                var b="总计";
+                // 直接赋值数据
+                table.render({
+                    elem: '#demo'
+                    ,cols: [[ //标题栏
+                        // {type: 'checkbox', title: '选中', fixed: 'left'},
+                        {type: 'checkbox', title: '选中', width:50,fixed: 'left'},
+                        {field: 'shelfNo', title: '记录ID', width: 150, sort: true, totalRowText:"本页总计",fixed: 'left'},
+                        {field: 'datetime', title: '时间', width: 250,sort: true, edit: 'text'},
+                        {field: 'houseId', title: '仓库', width: 90,sort: true,},
+                        {field: 'position', title: '货架', width: 90,sort: true,},
+                        {field: 'recordNo', title: '批次', width: 90,sort: true, edit: 'text',},
+                        {field: 'g1', title: '物品1', width: 100,sort: true, totalRow: true, edit: 'text'},
+                        {field: 'g2', title: '物品2', width: 100,sort: true, totalRow: true, edit: 'text'},
+                        {field: 'g3', title: '物品3', width: 100,sort: true, totalRow: true, edit: 'text'},
+                        {field: 'g4', title: '物品4', width: 100,sort: true, totalRow: true, edit: 'text'},
+                        {field: 'g5', title: '物品5', width: 100,sort: true, totalRow: true, edit: 'text'},
+                        {field: 'button', title: '操作',  toolbar:"#btn",width: 120},
+                    ]]
+                    ,data: a
+                    ,skin: 'row' //表格风格
+                    ,even: true
+                    //,size: 'lg' //尺寸
+                    // ,toolbar: true
+                    ,toolbar: '#toolbarDemo'
+                    // ,defaultToolbar: ['filter', 'exports', 'print', 
+                    // {
+                    //     title: '帮助'
+                    //     ,layEvent: 'LAYTABLE_TIPS'
+                    //     ,icon: 'layui-icon-tips'
+                    // }]
+                    ,page: true //是否显示分页
+                    ,limits: [10,50,500]
+                    ,limit: 10 //每页默认显示的数量
+                    ,totalRow: true
+                    //,loading: false //请求数据时，是否显示loading
                 });
-                }
-                ,add: function(){
-                table.addRow('test')
-                }
-            };
-            $('i').on('click', function(){
-                var type = $(this).data('type');
-                active[type] ? active[type].call(this) : '';
-            });
-            $('.layui-btn').on('click', function(){
-                var type = $(this).data('type');
-                active[type] ? active[type].call(this) : '';
-            });
-        });}
-    </script>
-
-
-    <script>
-        exampleTable()
-    </script>
-
-
-
-    <script>
-        let houseidInp = document.querySelector('#houseid')
-    </script>
-
-
-    <script>
-        function reseachForTable(data){
-            let charArr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
-            let result=[{"shelfNo": data['A']['shelfNo']
-                    ,"houseId": data['houseId']
-                    , "datetime": data['datetime']
-                    , "position": data['A']['position']
-                    , "recordNo": data['A']['recordNo']
-                    , "g1": data['A']['g1']
-                    , "g2": data['A']['g2']
-                    , "g3": data['A']['g3']
-                    , "g4": data['A']['g4']
-                    , "g5": data['A']['g5']
-                    }];
-            for (let i = 1; i < charArr.length; i++) {
-                let item ={"shelfNo": data[charArr[i]]['shelfNo']
-                    ,"houseId": data['houseId']
-                    , "datetime": data['datetime']
-                    , "position": data[charArr[i]]['position']
-                    , "recordNo": data[charArr[i]]['recordNo']
-                    , "g1": data[charArr[i]]['g1']
-                    , "g2": data[charArr[i]]['g2']
-                    , "g3": data[charArr[i]]['g3']
-                    , "g4": data[charArr[i]]['g4']
-                    , "g5": data[charArr[i]]['g5']
-                    };
-                result.push(item);
-            }
-            console.log(result)
-            showTable(result)
-        }
-    </script>
-
-
-
-    <script>
-        let reseachBtn = document.querySelector('#reseach')
-        reseachBtn.onclick = () => {
-
-            let requireData = {
-                type: 'now',
-                houseId: houseidInp.value
-            }
-
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "http://127.0.0.1:5000/inquire", true);
-            xhr.setRequestHeader('content-type', 'application/json');
-
-            //将用户输入值序列化成字符串
-            xhr.send(JSON.stringify(requireData));
-            xhr.onload = function () {
-                if (xhr.status === 200) {
-                    //根据服务器的响应内容格式处理响应结果
-                    var res = JSON.parse(xhr.responseText);
-                    console.log(res)
-                    if (res.status === 0) {
-                        let data = res.result
-                        console.log(res)
-                        reseachForTable(data)
-                        // console.log(data['C']['g1'])
-                        // let newInnerHTML = generInnerHtml(data, title)
-                        // tableObj.innerHTML = newInnerHTML
-                    } else {
-                        alert('未查询到相关记录')
+                var $ = layui.jquery, active = {
+                    parseTable: function(){
+                    table.init('parse-table-demo', {
+                        limit: 3
+                    });
                     }
-                } else {
-                    alert('查询失败')
+                    ,add: function(){
+                    table.addRow('test')
+                    }
+                };
+                $('i').on('click', function(){
+                    var type = $(this).data('type');
+                    active[type] ? active[type].call(this) : '';
+                });
+                $('.layui-btn').on('click', function(){
+                    var type = $(this).data('type');
+                    active[type] ? active[type].call(this) : '';
+                });
+    
+    
+                // 每列最右侧的按钮事件
+                table.on('tool(test)', function(obj){ // 双击 toolDouble
+                    var data = obj.data;
+                    console.log(obj)
+                    if(obj.event === 'del'){
+                        layer.confirm('确认删除本行吗？', function(index){
+                            obj.del();
+                            layer.close(index);
+                        });
+                    } else if(obj.event === 'edit'){
+                        layer.msg('直接点击可以编辑的单元格就可以修改了哦');
+                    }
+                });
+    
+    
+                // // 不是特别重要的小功能，但是layui这个监视事件有点麻烦
+                // table.on('toolbar(test)', function(obj){
+                //     var id = obj.config.id;
+                //     var checkStatus = table.checkStatus(id);
+                //     var othis = lay(this);
+                //     switch(obj.event){
+                //         // // tips提示框，但是暂时没能成功
+                //         // case 'LAYTABLE_TIPS':
+                //         //     layer.alert('Table for layui-v'+ layui.v);
+                //         // break;
+    
+                //         // // 获取一整页数据，也暂时没能成功
+                //         // case 'getData':
+                //         //     var getData = table.getData(id);
+                //         //     layer.alert(layui.util.escape(JSON.stringify(getData)));
+                //         // break;
+                //     };
+                // });
+     
+    
+                // 单元格编辑事件
+                table.on('edit(test)', function(obj){
+                    var field = obj.field //得到字段
+                    ,value = obj.value //得到修改后的值
+                    ,data = obj.data; //得到所在行所有键值           
+                    // var update = {};
+                    // update[field] = value;
+                    // obj.update(update);
+                    console.log(data);
+                    layer.msg('您已将ID为 ' + data.shelfNo + ' 的记录的 ' + field + ' 项数据更改为：' + value);
+                });
+            });}
+        </script>
+    
+    
+    
+    
+    
+        <script>
+            // 处理服务器端发来的结果数据，变成表格的数据格式，然后塞进showTable函数里面
+            function reseachForTable(data){
+                let charArr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
+                let result=[{"shelfNo": data['A']['shelfNo']
+                        ,"houseId": data['houseId']
+                        , "datetime": data['datetime']
+                        , "position": data['A']['position']
+                        , "recordNo": data['A']['recordNo']
+                        , "g1": data['A']['g1']
+                        , "g2": data['A']['g2']
+                        , "g3": data['A']['g3']
+                        , "g4": data['A']['g4']
+                        , "g5": data['A']['g5']
+                        }];
+                for (let i = 1; i < charArr.length; i++) {
+                    let item ={"shelfNo": data[charArr[i]]['shelfNo']
+                        ,"houseId": data['houseId']
+                        , "datetime": data['datetime']
+                        , "position": data[charArr[i]]['position']
+                        , "recordNo": data[charArr[i]]['recordNo']
+                        , "g1": data[charArr[i]]['g1']
+                        , "g2": data[charArr[i]]['g2']
+                        , "g3": data[charArr[i]]['g3']
+                        , "g4": data[charArr[i]]['g4']
+                        , "g5": data[charArr[i]]['g5']
+                        };
+                    result.push(item);
+                }
+                showTable(result)
+            }
+        </script>
+
+    
+        <!-- 用文档的数据初始化表格,发现能跑，说明reseachForTable函数和后面流程的showTable没什么问题 -->
+        <script>
+            a={"recordNo": 5, "houseId": 1, "datetime": "2022-07-06 17:31:46", "A": {"shelfNo": 23, "position": "A", "recordNo": 5, "g1": 2, "g2": 0, "g3": 0, "g4": 0, "g5": 0}, "B": {"shelfNo": 24, "position": "B", "recordNo": 5, "g1": 0, "g2": 1, "g3": 1, "g4": 0, "g5": 0}, "C": {"shelfNo": 25, "position": "C", "recordNo": 5, "g1": 0, "g2": 0, "g3": 0, "g4": 1, "g5": 3}, "D": {"shelfNo": 26, "position": "D", "recordNo": 5, "g1": 0, "g2": 2, "g3": 0, "g4": 0, "g5": 0}, "E": {"shelfNo": 27, "position": "E", "recordNo": 5, "g1": 0, "g2": 0, "g3": 2, "g4": 0, "g5": 0}, "F": {"shelfNo": 28, "position": "F", "recordNo": 5, "g1": 1, "g2": 0, "g3": 0, "g4": 0, "g5": 0}, "G": {"shelfNo": 29, "position": "G", "recordNo": 5, "g1": 0, "g2": 0, "g3": 1, "g4": 2, "g5": 3}, "H": {"shelfNo": 30, "position": "H", "recordNo": 5, "g1": 0, "g2": 0, "g3": 0, "g4": 0, "g5": 0}, "I": {"shelfNo": 31, "position": "I", "recordNo": 5, "g1": 1, "g2": 0, "g3": 2, "g4": 0, "g5": 0}, "J": {"shelfNo": 32, "position": "J", "recordNo": 5, "g1": 1, "g2": 1, "g3": 1, "g4": 1, "g5": 1}, "total": {"shelfNo": 33, "position": "all", "recordNo": 5, "g1": 5, "g2": 4, "g3": 7, "g4": 4, "g5": 7}}
+            reseachForTable(a)
+        </script>
+    
+    
+        <script>
+            let houseidInp = document.querySelector('#houseidText')
+            let reseachBtn = document.querySelector('#reseach')
+            reseachBtn.onclick = () => {
+                let requireData = {
+                        type: 'now',
+                        houseId: houseidInp.value
+                        }
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", "http://127.0.0.1:5000/inquire", true);
+                    xhr.setRequestHeader('content-type', 'application/json');
+    
+                    //将用户输入值序列化成字符串
+                    xhr.send(JSON.stringify(requireData));
+                    xhr.onload = function () {
+                        if (xhr.status == 200) {
+                            //根据服务器的响应内容格式处理响应结果
+                            var res = JSON.parse(xhr.responseText);
+                            console.log(res)
+                            if (res.status == 0) {
+                                let data = res.result
+                            reseachForTable(data)
+                        } else {
+                            alert('未查询到相关记录')
+                        }
+                    } else {
+                        alert('查询失败')
+                    }
                 }
             }
-        }
-
-    </script>
-
-
-
-
-
-
-    <script>layui.use(['laydate', 'form'],
-        function() {
-            var laydate = layui.laydate;
-
-            //执行一个laydate实例
-            laydate.render({
-                elem: '#start' //指定元素
-            });
-
-            //执行一个laydate实例
-            laydate.render({
-                elem: '#end' //指定元素
-            });
-        });
-
-
-
-        /*用户-删除*/
-        function member_del(obj, id) {
-            layer.confirm('确认要删除吗？',
-            function(index) {
-                //发异步删除数据
-                $(obj).parents("tr").remove();
-                layer.msg('已删除!', {
-                    icon: 1,
-                    time: 1000
-                });
-            });
-        }
-
-        function delAll(argument) {
-
+    
+        </script>
+    
+    
+    
+        
+        <!-- <script>
+            function delAll(argument) {
+    
             var data = tableCheck.getData();
-
+    
             layer.confirm('确认要删除吗？' + data,
             function(index) {
                 //捉到所有被选中的，发异步进行删除
@@ -457,8 +344,8 @@
                 });
                 $(".layui-form-checked").not('.header').parents('tr').remove();
             });
-        }
-    </script>
+            }        
+        </script> -->
+    
 
-</html>
-
+    </html>

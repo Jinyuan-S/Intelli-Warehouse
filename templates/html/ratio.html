@@ -2,7 +2,7 @@
 <html class="x-admin-sm">
     <head>
         <meta charset="UTF-8">
-        <title>后台登录-X-admin2.2</title>
+        <title>货物比例</title>
         <meta name="renderer" content="webkit|ie-comp|ie-stand">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
@@ -14,20 +14,31 @@
         <script src="../../static/lib/layui/layui.js" charset="utf-8"></script>
         <script type="text/javascript" src="../../static/js/xadmin.js"></script>
     </head>
-    <body>
-        <main>
 
-        </main>
+    <div class="x-nav" style="width:98%">
+        <span class="layui-breadcrumb">
+            <a href="" target="_blank">主界面</a>
+            <a href="">数据统计</a>
+            <a><cite>货物比例</cite></a>
+        </span>
+        <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="location.reload()" title="刷新">
+            <i class="layui-icon layui-icon-refresh" style="line-height:30px; top:50%; margin:auto;"></i>
+        </a>
+    </div>
 
         <div class="layui-fluid">
      
             <div class="layui-row layui-col-space15">
-                <div class="layui-col-sm12 layui-col-md24">
+                <div class="layui-col-sm12 layui-col-md12">
                     <div class="layui-card">
-                        <div class="layui-card-header">不同类别货物比例 / 数量情况</div>
-                        <div class="layui-card-body" style="min-height: 680px;">
-
-                            <div class="houseid">
+                        <div>
+                            <br/>
+                            <h1 align="center" margin-top: 50px>不同类别货物比例 / 数量情况</h1>
+                        </div>
+                        <div class="layui-card-body" style="min-height: 700px;">
+                        <!-- <div class="layui-card-body " style="min-height: 100px"> -->
+ 
+                        <!-- <div class="houseid">
                                 <label for="">仓库号 (houseId):</label>
                                 <input type="text" id="houseid">
                             </div>
@@ -35,8 +46,18 @@
                             <div class="layui-inline layui-show-xs-block">
                                 <button class="reseach" id='reseach' lay-submit="" lay-filter="sreach">
                                     <i class="layui-icon">&#xe615;</i></button>
-                            </div>
+                            </div> -->
 
+                            <form class="layui-form layui-col-space5">
+
+                                <div class="layui-inline layui-show-xs-block">
+                                    <input type="text" name="username" placeholder="请输入仓库号" autocomplete="off" class="layui-input" id="houseid"></div>
+                                <div class="layui-inline layui-show-xs-block">
+                                    <button class="layui-btn" lay-submit="" lay-filter="sreach" id="reseach" onclick>
+                                        <i class="layui-icon">&#xe615;</i></button>
+                                </div>
+                            </form>
+                            <br/>
                             <div id="main3" class="layui-col-sm12" style="height: 600px;"></div>
                         </div>
                     </div>
@@ -63,16 +84,11 @@
             },
             series : [
                 {
-                    name: '访问来源',
+                    name: '货物比例',
                     type: 'pie',
                     radius : '55%',
                     center: ['50%', '60%'],
                     data:[
-                        // {value:335, name:'货物类别1'},
-                        // {value:310, name:'货物类别2'},
-                        // {value:234, name:'货物类别3'},
-                        // {value:135, name:'货物类别4'},
-                        // {value:1548, name:'货物类别5'}
                         {value:335, name:'货物类别1'},
                         {value:310, name:'货物类别2'},
                         {value:234, name:'货物类别3'},
@@ -113,7 +129,7 @@
                     },
                     series : [
                         {
-                            name: '访问来源',
+                            name: '货物比例',
                             type: 'pie',
                             radius : '55%',
                             center: ['50%', '60%'],
