@@ -5,8 +5,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-{#    <link rel="stylesheet" href="/static//CSS/changePwd.css">#}
+{#    <link rel="stylesheet" href="../../static/CSS/changePwd.css">#}
     <link rel="stylesheet" href="{{ url_for('static', filename = '/CSS/changePwd.css') }}">
+    <!-- <link rel="stylesheet" href="../../static/lib/layui/css/layui.css"> -->
     <title>忘记密码</title>
 </head>
 
@@ -32,7 +33,10 @@ background-attachment: fixed;">
                 <input class="inp" id="newpwd1" type="password" name="newpwd1" value="" placeholder="确定新密码">
                 <br>
                 <br>
-                <input class="sub" type="submit" style="cursor:pointer" value="确认"/>
+                <input class="sub" type="button" style="cursor:pointer" id="submit" value="确认"/>
+                <!-- <button  type="button" class="layui-btn" lay-submit="" lay-filter="sreach" id="submit" onclick>
+                    <i style="width:200px">vkdw</i>
+                </button> -->
                 <br>
                 <br>
                 <!-- <input class="back" type="button" style="cursor:pointer" value="返回"/> -->
@@ -47,17 +51,19 @@ background-attachment: fixed;">
         // document.querySelector('.back').onclick = () => {
         //     location.href = './logIn.html'
         // }
-        document.querySelector('.sub').onclick = () => {
+        document.querySelector('#submit').onclick = () => {
             let id = document.querySelector('#id').value
             let newpwd1 = document.querySelector('#newpwd1').value
             let newpwd2 = document.querySelector('#newpwd2').value
             let verificationCode = document.querySelector('#verificationCode').value
             if (id === '') {
                 alert('账号不能为空')
-            } else if (newpwd1 !== newpwd2) {
-                alert('两次密码不一致')
             } else if(verificationCode !== 'abcd'){
                 alert('验证码错误')
+            }else if (newpwd2 == '') {
+                alert('密码不能为空')
+            } else if (newpwd1 !== newpwd2) {
+                alert('两次密码不一致')
             } else {
                 let requireData = {
                     'type': 'changepwd', 'id': id, 'newpwd': newpwd1

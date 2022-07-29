@@ -31,11 +31,15 @@ input {
 }
 
 #man,#woman {
-    width:180px;
+    width:30px;
 
     text-align: left;
     display: block;
     padding-top: 2px;
+}
+
+k{
+    color: rgba(0, 0, 0, 0);
 }
 
 .container>div {

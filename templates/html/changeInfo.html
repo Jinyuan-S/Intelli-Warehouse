@@ -31,8 +31,9 @@ background-attachment: fixed;">
         </div>
         <div>
             <label for="">性别：</label>
-            <input type="radio" name="sex" id="man" checked><span>男</span>
-            <input type="radio" name="sex" id="woman" checked><span>女</span>
+            <input type="radio" name="sex" id="man" style="margin-left:75px;" checked><span>男</span>
+            <input type="radio" name="sex" id="woman" style="margin-left:75px;"><span>女</span>
+            <span type="k" style="margin-left:152px;color: rgba(0, 0, 0, 0);">1</span>
             <!-- <input type="radio" name="sex" id="other"><span>其他</span> -->
         </div>
         <div>
@@ -49,7 +50,7 @@ background-attachment: fixed;">
             <!-- <input type='button' value='返回' Response.Write("<script language=\"javascript\">window.opener=null;window.close();</script>");> -->
             <!-- <input type='button' value='返回' onclick="window.close();"/> -->
             <!-- <button class="changeInfo" style="display:block;margin:0 auto" style="cursor: pointer">修改信息</button> -->
-            <button class="changeInfo" style="cursor: pointer">修改信息</button>
+            <button class="changeInfo" type="button" style="cursor: pointer">修改信息</button>
         </div>
     </div>
     <script>
@@ -61,17 +62,26 @@ background-attachment: fixed;">
         let manObj = document.querySelector('#man')
         let womanObj = document.querySelector('#woman')
         let managerIdObj = document.querySelector('#managerId')
-        idObj.value = localStorage.getItem('workerId')
-        fNameObj.value = localStorage.getItem('fName')
-        lNameObj.value = localStorage.getItem('lName')
-        doBObj.value = localStorage.getItem('doB')
-        managerIdObj.value = localStorage.getItem('managerId')
-        if (localStorage.getItem('gender') === 'male') {
-            manObj.checked = true
-        } else {
-            womanObj.checked = true
-        }
+        if(localStorage.getItem('doB')!= null){
+            idObj.value = localStorage.getItem('workerId')
+            fNameObj.value = localStorage.getItem('fName')
+            lNameObj.value = localStorage.getItem('lName')
+            doBObj.value = localStorage.getItem('doB')
+            managerIdObj.value = localStorage.getItem('managerId')
 
+            if (localStorage.getItem('gender') === 'male') {
+                manObj.checked = true
+            } else {
+                womanObj.checked = true
+            }
+        }else{
+            idObj.value = 1001
+            fNameObj.value = 'Yuekai'
+            lNameObj.value = 'Zhang'
+            manObj.checked = true
+            doBObj.value = '2019-08-15'
+            managerIdObj.value = 2202
+        }
         document.querySelector('.back').onclick = () => {
             history.bcak()
         }
@@ -120,7 +130,8 @@ background-attachment: fixed;">
                         localStorage.setItem('gender', res.result[4])
                         localStorage.setItem('pwd', res.result[5])
                         localStorage.setItem('managerId', res.result[6])
-                        location.href = '../records'
+                        // location.href = '../records'
+                        alert('修改成功！')
                     } else {
                         alert('修改失败')
                     }

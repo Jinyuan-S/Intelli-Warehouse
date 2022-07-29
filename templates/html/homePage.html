@@ -1,16 +1,238 @@
-<!DOCTYPE html>
-<html lang="en">
-<link rel="icon" href="../img/BUPT.ico" type="image/x-icon"/>
+<!doctype html>
+<html class="x-admin-sm">
+    <head>
+        <meta charset="UTF-8">
+        <title>货物比例</title>
+        <meta name="renderer" content="webkit|ie-comp|ie-stand">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+        <!-- <meta http-equiv="Cache-Control" content="no-siteapp" /> -->
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+        <link rel="stylesheet" href="../../static/CSS/ratio.css">
+        <link rel="stylesheet" href="../../static/CSS/layui/font.css">
+        <link rel="stylesheet" href="../../static/CSS/layui/xadmin.css">
+        <link rel="stylesheet" href="../../static/CSS/homepage.css">
+        <script src="../../static/lib/layui/layui.js" charset="utf-8"></script>
+        <script type="text/javascript" src="../../static/js/xadmin.js"></script>
+    </head>
+    <body>
+        <div class="layui-fluid">
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-body ">
+                            <a>
+                                欢迎您的使用!  当前时间为：
+                                <button id="datetime" style="font-size: medium; color: black ;background-color:rgba(1,1,1,0);border:none;width:150px" disabled>
+                                <script>setInterval("document.getElementById('datetime').innerHTML=new Date().toLocaleString();", 1000);</script>
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-header">数据统计</div>
+                        <div class="layui-card-body ">
+                            <ul class="layui-row layui-col-space10 layui-this x-admin-carousel x-admin-backlog">
+                                <li class="layui-col-md2 layui-col-xs6">
+                                    <a href="javascript:;" class="x-admin-backlog-body">
+                                        <h3>仓库数</h3>
+                                        <p>
+                                            <cite>
+                                                <input class="inp" id="user" name="username" value="" placeholder='9' style="background-color:rgba(1,1,1,0);border:none;width:60px;cursor: pointer;" disabled>
+                                            </cite>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="layui-col-md2 layui-col-xs6">
+                                    <a href="javascript:;" class="x-admin-backlog-body">
+                                        <h3>每个仓库货架数</h3>
+                                        <p>
+                                            <cite>
+                                                <input class="inp" id="user" name="username" value="" placeholder='10' style="background-color:rgba(1,1,1,0);border:none;width:60px;cursor: pointer;" disabled>
+                                            </cite>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="layui-col-md2 layui-col-xs6">
+                                    <a href="javascript:;" class="x-admin-backlog-body">
+                                        <h3>机器人总数</h3>
+                                        <p>
+                                            <cite>
+                                                <input class="inp" id="user" name="username" value="" placeholder='13' style="background-color:rgba(1,1,1,0);border:none;width:60px;cursor: pointer;" disabled>
+                                            </cite>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="layui-col-md2 layui-col-xs6">
+                                    <a href="javascript:;" class="x-admin-backlog-body">
+                                        <h3>当前货物总量</h3>
+                                        <p>
+                                            <cite>
+                                                <input class="inp" id="user" name="username" value="" placeholder='323' style="background-color:rgba(1,1,1,0);border:none;width:60px;cursor: pointer;" disabled>
+                                            </cite>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="layui-col-md2 layui-col-xs6">
+                                    <a href="javascript:;" class="x-admin-backlog-body">
+                                        <h3>货物种类</h3>
+                                        <p>
+                                            <cite>
+                                                <input class="inp" id="user" name="username" value="" placeholder='5' style="background-color:rgba(1,1,1,0);border:none;width:60px;cursor: pointer;" disabled>
+                                            </cite>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="layui-col-md2 layui-col-xs6">
+                                    <a href="javascript:;" class="x-admin-backlog-body">
+                                        <h3>最近一次记录时间</h3>
+                                        <p>
+                                            <cite>
+                                                <input class="inp" id="user" name="username" value="" placeholder='2022-07-30 07:37' style="background-color:rgba(1,1,1,0);border:none;width:200px;cursor: pointer;" disabled>
+                                            </cite>
+                                        </p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md12">
 
-<body>
-    这里是主页，仅为美观考虑，主要功能已经实现。所以如果要写主页的话一定要美观，不好看就没有写的必要。因此布局有点麻烦，随后有时间的话我再做吧
-</body>
+                    <!-- <div class="layui-col-sm12 layui-col-md6">
+                        <div class="layui-card">
+                            <div class="layui-card-header">最新一周新增用户</div>
+                            <div class="layui-card-body" style="min-height: 280px;">
+                                <div id="main1" class="layui-col-sm12" style="height: 300px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-sm12 layui-col-md6" style="margin-left: 10px;">
+                        <div class="layui-card">
+                            <div class="layui-card-header">最新一周新增用户</div>
+                            <div class="layui-card-body" style="min-height: 280px;">
+                                <div id="main1" class="layui-col-sm12" style="height: 300px;"></div>
+                            </div>
+                        </div>
+                    </div> -->
+
+
+
+
+
+                    <div class="layui-card">
+                        <div class="layui-card-body" style="min-height: 700px;">
+                            <div style="height:400px">
+                        <!-- <div class="layui-card-body " style="min-height: 100px"> -->
+    
+
+                            <li id="main" class="layui-col-sm12" style="height: 300px;top:310px;left:5px;margin-bottom: -100px;"></li>
+                            <!-- <li style="color: brown;width: 100px;height: 100px;"></li> -->
+                            <div class="img1"><img src="../../static/img/background1.jpg" style="height:200px;width:200px ;top:100px;left:10px"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+            </div>
+        </div>        
+    </body>
+
+    <script src="../../static/js/echarts.js"></script>
+    <!-- <script src="../js/style.js"></script> -->
+    <!-- <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/extension/bmap.min.js"></script> -->
+    <script type="text/javascript">
+        // drawLine(){
+                var myChart = echarts.init(document.getElementById('main'));
+                var option = {
+                    baseOption:{
+                        legend: {},
+                        tooltip: {
+                            trigger: 'axis',
+                            showContent: false
+                        },
+                        dataset: {
+                            source: [
+                                ['product', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00'],
+                                ['洁美家初体验公众号', 41.1, 99.7, 165.1, 53.3, 103.8, 298.7 , 125 ],
+                                ['洁美家一元拼团', 86.5, 119, 243,109, 73.4, 255 , 225 ],
+                                ['好厨娘初体验公众号', 24.1, 99.5, 156.4, 288.2, 108.5 ,225 ],
+                                ['洁美家包年Q3公众号', 155.2, 267.1, 369.2, 472.4, 503.9, 139.1 ,99.2 ],
+                                ['洁美家包年Q6公众号', 100, 83, 99, 109, 250, 150 ,225 ,88],
+                                ['洁美家包年Q9公众号', 210, 309, 450, 324, 250, 150 , 109],
+                                ['洁美家包年Q10公众号', 101, 196, 293, 102, 199, 277 , 159],
+                                ['洁美家包年Q11公众号', 213, 432, 124, 543, 341, 231 , 123],
+                            ]
+                        },
+                        xAxis: {type: 'category'},
+                        yAxis: {gridIndex: 0},
+                        grid: { width:'50%', height:'60%',top: '15%',left:'50%'},
+                        series: [
+                            {type: 'line', smooth: true,markPoint: {
+                data: [
+                    {type: 'max', name: '最大值'},
+                    {type: 'min', name: '最小值'}
+                ]
+            },seriesLayoutBy: 'row'},
+                            {type: 'line', smooth: true, seriesLayoutBy: 'row'},
+                            {type: 'line', smooth: true, seriesLayoutBy: 'row'},
+                            {type: 'line', smooth: true, seriesLayoutBy: 'row'},
+                            {type: 'line', smooth: true, seriesLayoutBy: 'row'},
+                            {type: 'line', smooth: true, seriesLayoutBy: 'row'},
+                            {type: 'line', smooth: true, seriesLayoutBy: 'row'},
+                            {type: 'line', smooth: true, seriesLayoutBy: 'row'},
+                            {
+                                type: 'pie',
+                                id: 'pie',
+                                radius: ['30%', '40%'],
+                                center: ['25%', '50%'],
+
+                                label: {
+                                    formatter: '{b}: {@2012} ({d}%)'
+                                },
+                                encode: {
+                                    itemName: 'product',
+                                    value: '10:00',//此处设置初始化时默认的Y轴起点，否则初始化渲染图表的时候，左边的饼状图会是空白
+                                    tooltip: '10:00',//此处设置初始化时默认的Y轴起点，否则初始化渲染图表的时候，左边的饼状图会是空白
+                                }
+                            },
+
+                        ]
+                    },
+                    media: [
+                        
+                    ]
+                };
+ 
+                myChart.on('updateAxisPointer', function (event) {
+                    var xAxisInfo = event.axesInfo[0];
+                    if (xAxisInfo) {
+                        var dimension = xAxisInfo.value + 1;
+                        myChart.setOption({
+                            series: {
+                                id: 'pie',
+                                label: {
+                                    formatter: '{b}: {@[' + dimension + ']} ({d}%)'
+                                },
+                                encode: {
+                                    value: dimension,
+                                    tooltip: dimension
+                                }
+                            }
+                        });
+                    }
+                });
+ 
+                myChart.setOption(option);
+                window.addEventListener("resize", () => { myChart.resize();});
+            // }
+    </script>
 
 </html>
