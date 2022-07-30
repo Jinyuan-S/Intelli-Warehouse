@@ -1,0 +1,17 @@
+.inp::-webkit-input-placeholder { /* WebKit browsers */ 
+    color:blue; 
+    } 
+    
+    input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */ 
+    color:blue; 
+    } 
+    
+    input::-moz-placeholder { /* Mozilla Firefox 19+ */ 
+    color:blue;
+    } 
+    
+    input:-ms-input-placeholder { /* Internet Explorer 10+ */ 
+    color:blue;
+    } 
+    
+    

@@ -54,7 +54,7 @@
                                     <div class="layui-inline layui-show-xs-block">
                                         <input type="text" name="username" placeholder="请输入仓库号" autocomplete="off" class="layui-input" id="houseidText"></div>
                                     <div class="layui-inline layui-show-xs-block">
-                                        <button  type="button" class="layui-btn" lay-submit="" lay-filter="sreach" id="reseach" onclick>
+                                        <button  type="button" class="layui-btn" lay-submit="" lay-filter="sreach" id="research" onclick>
                                             <i class="layui-icon">&#xe615;</i></button>
                                     </div>
                                 </form>
@@ -256,7 +256,7 @@
     
         <script>
             // 处理服务器端发来的结果数据，变成表格的数据格式，然后塞进showTable函数里面
-            function reseachForTable(data){
+            function researchForTable(data){
                 let charArr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
                 let result=[{"shelfNo": data['A']['shelfNo']
                         ,"houseId": data['houseId']
@@ -288,17 +288,17 @@
         </script>
 
     
-        <!-- 用文档的数据初始化表格,发现能跑，说明reseachForTable函数和后面流程的showTable没什么问题 -->
+        <!-- 用文档的数据初始化表格,发现能跑，说明researchForTable函数和后面流程的showTable没什么问题 -->
         <script>
             a={"recordNo": 5, "houseId": 1, "datetime": "2022-07-06 17:31:46", "A": {"shelfNo": 23, "position": "A", "recordNo": 5, "g1": 2, "g2": 0, "g3": 0, "g4": 0, "g5": 0}, "B": {"shelfNo": 24, "position": "B", "recordNo": 5, "g1": 0, "g2": 1, "g3": 1, "g4": 0, "g5": 0}, "C": {"shelfNo": 25, "position": "C", "recordNo": 5, "g1": 0, "g2": 0, "g3": 0, "g4": 1, "g5": 3}, "D": {"shelfNo": 26, "position": "D", "recordNo": 5, "g1": 0, "g2": 2, "g3": 0, "g4": 0, "g5": 0}, "E": {"shelfNo": 27, "position": "E", "recordNo": 5, "g1": 0, "g2": 0, "g3": 2, "g4": 0, "g5": 0}, "F": {"shelfNo": 28, "position": "F", "recordNo": 5, "g1": 1, "g2": 0, "g3": 0, "g4": 0, "g5": 0}, "G": {"shelfNo": 29, "position": "G", "recordNo": 5, "g1": 0, "g2": 0, "g3": 1, "g4": 2, "g5": 3}, "H": {"shelfNo": 30, "position": "H", "recordNo": 5, "g1": 0, "g2": 0, "g3": 0, "g4": 0, "g5": 0}, "I": {"shelfNo": 31, "position": "I", "recordNo": 5, "g1": 1, "g2": 0, "g3": 2, "g4": 0, "g5": 0}, "J": {"shelfNo": 32, "position": "J", "recordNo": 5, "g1": 1, "g2": 1, "g3": 1, "g4": 1, "g5": 1}, "total": {"shelfNo": 33, "position": "all", "recordNo": 5, "g1": 5, "g2": 4, "g3": 7, "g4": 4, "g5": 7}}
-            reseachForTable(a)
+            researchForTable(a)
         </script>
     
     
         <script>
             let houseidInp = document.querySelector('#houseidText')
-            let reseachBtn = document.querySelector('#reseach')
-            reseachBtn.onclick = () => {
+            let researchBtn = document.querySelector('#research')
+            researchBtn.onclick = () => {
                 let requireData = {
                         type: 'now',
                         houseId: houseidInp.value
@@ -316,7 +316,7 @@
                             console.log(res)
                             if (res.status == 0) {
                                 let data = res.result
-                            reseachForTable(data)
+                            researchForTable(data)
                         } else {
                             alert('未查询到相关记录')
                         }

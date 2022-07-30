@@ -41,16 +41,16 @@
                         <label for="" class="layui-form-label">
                             姓：</label>
                         <div class="layui-input-inline">
-                            <input type="text" id="lname" name="email" required="" class="layui-input" disabled>
+                            <input type="text" id="lName" name="email" required="" class="layui-input" disabled>
                         </div>
                     </div>
-                    <!-- <div class="layui-form-item">
+                    <div class="layui-form-item">
                         <label for="" class="layui-form-label">
                             性别：</label>
                         <div class="layui-input-inline">
-                            <input type="text" id="" name="email" required="" class="layui-input" disabled>
+                            <input type="text" id="gender" name="email" required="" class="layui-input" disabled>
                         </div>
-                    </div> -->
+                    </div>
                     <div class="layui-form-item">
                         <label for="" class="layui-form-label">
                             注册日期：</label>
@@ -74,15 +74,30 @@
         let fNameObj = document.querySelector('#fName')
         let lNameObj = document.querySelector('#lName')
         let doBObj = document.querySelector('#doB')
-        // let manObj = document.querySelector('#man')
-        // let womanObj = document.querySelector('#woman')
+        let genderObj = document.querySelector('#gender')
         let managerIdObj = document.querySelector('#managerId')
-        idObj.value = localStorage.getItem('workerId')
-        // idObj.value = "123456"
-        fNameObj.value = localStorage.getItem('fName')
-        lNameObj.value = localStorage.getItem('lName')
-        doBObj.value = localStorage.getItem('doB')
-        managerIdObj.value = localStorage.getItem('managerId')
+        if(localStorage.getItem('doB')!=null){            
+            // console.log('错误啦！')
+            idObj.value = localStorage.getItem('workerId')
+            fNameObj.value = localStorage.getItem('fName')
+            lNameObj.value = localStorage.getItem('lName')
+            doBObj.value = localStorage.getItem('doB')
+            managerIdObj.value = localStorage.getItem('managerId')
+            if (localStorage.getItem('gender') === 'male') {
+                genderObj.value = '男'
+            } else {
+                genderObj.value = '女'
+            }
+
+        }else{
+            idObj.value = 1001
+            fNameObj.value = 'Yuekai'
+            lNameObj.value = 'Zhang'
+            doBObj.value = '2019-08-15'
+            managerIdObj.value = 2202
+            genderObj.value = '男'
+        }
+
         </script>
     </body>        
 </html>
