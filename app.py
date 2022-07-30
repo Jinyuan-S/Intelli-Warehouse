@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template, url_for
-import json
+import datetime
 from database import *
 
 app = Flask(__name__)
@@ -39,7 +39,7 @@ def ret_login():
 def ret_login_changePw():
     return render_template('html/changePwd1.html')
 
-@app.route('/main/info')
+@app.route('/home/info')
 def ret_main_popinfo():
     return render_template('html/info.html')
 
@@ -89,7 +89,7 @@ def user():
         ret['status'] = 0
         ret['result'] = user_info[0]  # 返回更新后的信息
 
-    print(ret)
+    # print(ret)
     return json.dumps(ret, default=str)
 
 
@@ -118,8 +118,8 @@ def inquire():
             ret['result'] = records[0]
 
     elif req['type'] == 'interval':
-        rows, records = db.query('SELECT * FROM Records WHERE houseId=1 AND datetime>="%s" \
-                AND datetime<="%s" ORDER BY datetime DESC;' % (req['from'], req['to']), True)
+        rows, records = db.query('SELECT * FROM Records WHERE houseId="%s" AND datetime>="%s" \
+                AND datetime<="%s" ORDER BY datetime DESC;' % (req['houseId'], req['from'], req['to']), True)
         # print(records)
         if rows == 0:
             ret['status'] = 202  # 此仓库暂无记录
@@ -128,7 +128,29 @@ def inquire():
             records = expand(records)
             ret['status'] = 0
             ret['result'] = records
-    print(ret)
+
+    elif req['type'] == 'week':
+        rows, records = db.query("SELECT * FROM Shelf WHERE position='all' ORDER BY shelfNo DESC LIMIT 7", True)
+        ret['status'] = rows
+        ret['result'] = records
+
+    elif req['type'] == 'month':
+        rows, records = db.query("SELECT * FROM Shelf WHERE position='all' ORDER BY shelfNo DESC LIMIT 30", True)
+        ret['status'] = rows
+        ret['result'] = records
+
+    elif req['type'] == 'time':
+        rows, records = db.query('SELECT * FROM Records WHERE houseId="%s" AND datetime>="%s" ORDER BY datetime DESC LIMIT 1 '
+                                 % (req['houseId'], req['time']), True)
+        if rows == 0:
+            ret['status'] = 203  # 此仓库暂无记录
+            ret['result'] = []
+        else:
+            records = expand(records)
+            ret['status'] = 0
+            ret['result'] = records
+
+    # print(ret)
     return json.dumps(ret, default=str)
 
 
@@ -161,25 +183,50 @@ def receive_data ():
         shelf_nos[6], shelf_nos[7], shelf_nos[8], shelf_nos[9], shelf_nos[10],
         record_no[0][0]))
 
+    trans_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")  # 时间
+    addr = request.remote_addr  # 主机ip
+    content_len = request.content_length  # 数据量长度
+    receive_status = 'success'  # 接收状态
+    write_status = 'success'  # 写入状态
+    house_id = req[0]  # 仓库编号
+    car_id = '16'  # 车辆id
+
+    db.query("INSERT INTO Trans VALUE (null, '%s', '%s', %s, %s, %s, '%s','%s')"
+             % (trans_time, addr, house_id, car_id, content_len, receive_status, write_status))
+
     add_record(req)
+
     ret['status'] = '0'
     return json.dumps(ret, default=str)
 
 
 @app.route('/test', methods=['POST'])
-def testtest ():
+def testtest():
     req_json = request.json
-    print(req_json)
-
-    print(type(req_json))
-    addr = request.remote_addr
-    content_len = request.content_length
     ret = {}
-    print(addr)
-    print(content_len)
+    print(req_json)
+    rows, records = db.query("SELECT * FROM Shelf WHERE position='all' ORDER BY shelfNo DESC LIMIT 7", True)
+    ret['number'] = rows
+    ret['result'] = records
+
     return json.dumps(ret, default=str)
 
 
 if __name__ == '__main__':
     # app.run(debug=True)
     app.run()
+
+# trans_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")    # 时间
+#     addr = request.remote_addr  # 主机ip
+#     content_len = request.content_length    # 数据量长度
+#     receive_status = 'success'  # 接收状态
+#     write_status = 'success'    # 写入状态
+#     house_id = req_json[0]      # 仓库编号
+#     car_id = '16'        # 车辆id
+#
+#     db.query("INSERT INTO Trans VALUE (null, '%s', '%s', %s, %s, %s, '%s','%s')"
+#              % (trans_time, addr, house_id, car_id, content_len, receive_status, write_status) )
+#     ret = {}
+#     # print('house id = ', house_id)
+#     # print(addr)
+#     # print(content_len)
