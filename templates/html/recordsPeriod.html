@@ -178,6 +178,10 @@
                             // table.checkStatus(obj.config.id).data.del();
                             $(".layui-form-checked").not('.header').parents('tr').remove();
                             layer.close(index);
+                            layer.msg('已删除!', {
+                                icon: 1,
+                                time: 1000
+                            });
                         }
                         );
                         break;
@@ -270,6 +274,10 @@
                     layer.confirm('确认删除本行吗？', function(index){
                         obj.del();
                         layer.close(index);
+                        layer.msg('已删除!', {
+                            icon: 1,
+                            time: 1000
+                        });
                     });
                 } else if(obj.event === 'edit'){
                     layer.msg('直接点击可以编辑的单元格就可以修改了哦');

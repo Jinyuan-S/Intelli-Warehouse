@@ -13,6 +13,8 @@
         <link rel="stylesheet" href="../../static/CSS/layui/xadmin.css">
         <script src="../../static/lib/layui/layui.js" charset="utf-8"></script>
         <script type="text/javascript" src="../../static/js/xadmin.js"></script>
+        <script src="../../static/js/echarts.js"></script>
+        <script src="../../static/js/style.js"></script>
     </head>
 
     <div class="x-nav" style="width:98%">
@@ -34,7 +36,7 @@
                         <div>
                             <br/>
                             <br/>
-                            <h1 align="center" margin-top: 50px>不同类别货物比例 / 数量情况</h1>
+                            <h1 align="center" margin-top: 50px>某一仓库 某时间货物比例 / 数量情况</h1>
                         </div>
                         <div class="layui-card-body" style="min-height: 700px;">
                             <br/>
@@ -55,7 +57,7 @@
                                     <input type="text" name="username" placeholder="请输入仓库号" autocomplete="off" class="layui-input" id="houseid">
                                 </div>
                                 <div class="layui-inline layui-show-xs-block" style="margin-left:10px;">
-                                    <input class="layui-input" autocomplete="off" placeholder="请选择查询日期" name="end" id="date">
+                                    <input class="layui-input" autocomplete="off" placeholder="请选择查询日期" name="date" id="date">
                                 </div>
                                 
                                 <div class="layui-inline layui-show-xs-block"style="margin-left:10px;">
@@ -72,13 +74,13 @@
 
             </div>
         </div>
-        <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js"></script>
-        <!-- <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/extension/bmap.min.js"></script> -->
+
+
 
 
         <script type="text/javascript">        
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('main3'));
+        var myChart = echarts.init(document.getElementById('main3'),'blue');
         // 指定图表的配置项和数据
         var option = {
             tooltip : {
@@ -94,14 +96,14 @@
                 {
                     name: '货物比例',
                     type: 'pie',
-                    radius : '55%',
-                    center: ['50%', '60%'],
+                    radius : ['50%','70%'],
+                    center: ['50%', '50%'],
                     data:[
-                        {value:335, name:'货物类别1'},
-                        {value:310, name:'货物类别2'},
-                        {value:234, name:'货物类别3'},
-                        {value:135, name:'货物类别4'},
-                        {value:1548, name:'货物类别5'}                        
+                    {value:7, name:'货物类别1'},
+                    {value:4, name:'货物类别2'},
+                    {value:5, name:'货物类别3'},
+                    {value:1, name:'货物类别4'},
+                    {value:5, name:'货物类别5'}                          
                     ],
                     itemStyle: {
                         emphasis: {
@@ -140,9 +142,10 @@
     <script>
         let researchBtn = document.querySelector('#research')
         let houseidInp = document.querySelector('#houseid')
+        let timeInp = document.querySelector('#date')
 
         function showGraph(data){
-            var myChart = echarts.init(document.getElementById('main3'));
+            var myChart = echarts.init(document.getElementById('main3'),'blue');
             // 指定图表的配置项和数据
             var option = {
                 tooltip : {
@@ -158,14 +161,9 @@
                     {
                         name: '货物比例',
                         type: 'pie',
-                        radius : '55%',
-                        center: ['50%', '60%'],
+                        radius : ['50%','70%'],
+                        center: ['50%', '50%'],
                         data:[
-                            // {value:335, name:'货物类别1'},
-                            // {value:310, name:'货物类别2'},
-                            // {value:234, name:'货物类别3'},
-                            // {value:135, name:'货物类别4'},
-                            // {value:1548, name:'货物类别5'}
                             {value:data['total']['g1'], name:'货物类别1'},
                             {value:data['total']['g2'], name:'货物类别2'},
                             {value:data['total']['g3'], name:'货物类别3'},
@@ -190,8 +188,9 @@
 
         researchBtn.onclick = () => {
             let requireData = {
-                type: 'now',
-                houseId: houseidInp.value
+                type: 'time',
+                houseId: houseidInp.value,
+                time: timeInp.value,
             }
 
             var xhr = new XMLHttpRequest();
@@ -208,9 +207,6 @@
                     if (res.status === 0) {
                         let data = res.result
                         showGraph(data)
-                        // console.log(data['C']['g1'])
-                        // let newInnerHTML = generInnerHtml(data, title)
-                        // tableObj.innerHTML = newInnerHTML
                     } else {
                         alert('未查询到相关记录')
                     }
