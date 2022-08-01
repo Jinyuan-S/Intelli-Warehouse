@@ -1,0 +1,301 @@
+<!doctype html>
+<html class="x-admin-sm">
+    <head>
+        <meta charset="UTF-8">
+        <title>货物比例</title>
+        <meta name="renderer" content="webkit|ie-comp|ie-stand">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+        <!-- <meta http-equiv="Cache-Control" content="no-siteapp" /> -->
+
+        <link rel="stylesheet" href="../../static/CSS/ratio.css">
+        <link rel="stylesheet" href="../../static/CSS/layui/font.css">
+        <link rel="stylesheet" href="../../static/CSS/layui/xadmin.css">
+        <script src="../../static/lib/layui/layui.js" charset="utf-8"></script>
+        <script type="text/javascript" src="../../static/js/xadmin.js"></script>
+        <script src="../../static/js/echarts.js"></script>
+        <script src="../../static/js/style.js"></script>
+    </head>
+
+    <div class="x-nav" style="width:98%">
+        <span class="layui-breadcrumb">
+            <a href="" target="_blank">主界面</a>
+            <a href="">数据统计</a>
+            <a><cite>数量变化</cite></a>
+        </span>
+        <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="location.reload()" title="刷新">
+            <i class="layui-icon layui-icon-refresh" style="line-height:30px; top:50%; margin:auto;"></i>
+        </a>
+    </div>
+
+    <div class="layui-fluid">
+     
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-sm12 layui-col-md12">
+                <div class="layui-card">
+                    <div>
+                        <br/>
+                        <br/>
+                        <h1 align="center" margin-top: 50px>某一仓库近期货物数量变化情况</h1>
+                    </div>
+                    <div class="layui-card-body" style="min-height: 800px;">
+                        <br/>
+                        <form class="layui-form layui-col-space5">
+                            <div class="layui-inline layui-show-xs-block" style="margin-left:25%;">
+                                <input type="text" name="username" placeholder="请输入仓库号" autocomplete="off" class="layui-input" id="houseid">
+                            </div>
+                            <div class="layui-inline layui-show-xs-block"style="margin-left:10px;">
+                                <button type="button" class="layui-btn" lay-submit="" lay-filter="sreach" id="week">
+                                    <i class="layui-icon">&#xe615;</i>查询一周内的仓储数据变化
+                                </button>
+                            </div>
+                            
+                            <div class="layui-inline layui-show-xs-block"style="margin-left:10px;">
+                                <button type="button" class="layui-btn" lay-submit="" lay-filter="sreach" id="month">
+                                    <i class="layui-icon">&#xe615;</i>查询一个月内的仓储数据变化
+                                </button>
+                            </div>
+                        </form>
+                        <br/>
+                        <div id="block1" class="layui-col-sm6" style="height: 700px; width:70%; left:15%"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+
+
+    <script>
+        // 数据总天数
+        var numberOfTheDate = 30;
+
+        //显示某年某月某日
+        function getForecastTime(date) {
+            date = new Date(date);
+            var nDate = date.getFullYear() + "年";
+            nDate+=date.getMonth() + 1 + "月" + date.getDate() + "日";
+            return nDate;
+        }
+
+        //日期变化
+        function dateChange(date) {
+            // debugger;
+            if (!date) {
+                date = new Date();//没有传入值时,默认是当前日期
+            }
+            date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+            date += " 00:00:00";//设置为当天凌晨12点
+            date = Date.parse(new Date(date))/1000;//转换为时间戳
+            date -= (86400);//修改后的时间戳
+            var newDate = new Date(parseInt(date) * 1000);//转换为时间
+            // console.log(newDate);
+            return newDate;
+        }
+
+        // 数组里面的日期格式
+        function showDate(newDate){
+            // return newDate.getFullYear() + '.' + (newDate.getMonth() + 1) + '.' + newDate.getDate();
+            return (newDate.getMonth() + 1) + '-' + newDate.getDate();
+        }
+
+        // 创建假数据
+        function creatData(){
+            var dateData=[]
+            var mydate = new Date();
+            console.log(mydate);
+
+            for(let i=0;i<numberOfTheDate;i++){
+                dateData.unshift(showDate(mydate));
+                mydate=dateChange(mydate);
+                showDate(mydate);
+            }
+            dateData.unshift('日期');
+            // console.log(dateData);
+            var dataset=[dateData];
+            let gArray=['货物类别1','货物类别2','货物类别3','货物类别4','货物类别5']
+            for(let i=0;i<gArray.length;i++){
+                let gdata=[gArray[i]]
+                for(let j=0;j<numberOfTheDate;j++){
+                    var min=3;
+                    var max=17;
+                    var random=Math.floor(Math.random()*max-min+1)+min;
+                    gdata.push(random);
+                }
+                dataset.push(gdata);
+            }
+            console.log(dataset);
+            var a=30-dataset[1][numberOfTheDate]-dataset[2][numberOfTheDate]-dataset[3][numberOfTheDate]-dataset[4][numberOfTheDate]
+            return dataset;
+        }
+
+        var data=creatData();
+    </script>
+
+
+    <script>
+        function perceedData(realData){
+            
+        };
+    </script>
+
+
+    <script>
+        function showGraph(data){
+            var myChart = echarts.init(document.getElementById('main3'),'blue');
+            // 指定图表的配置项和数据
+            var option = {
+                tooltip : {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                legend: {
+                    orient: 'vertical',
+                    left: 'left',
+                    data: ['货物类别1','货物类别2','货物类别3','货物类别4','货物类别5']
+                },
+                series : [
+                    {
+                        name: '货物比例',
+                        type: 'pie',
+                        radius : ['50%','70%'],
+                        center: ['50%', '50%'],
+                        data:[
+                            {value:data['total']['g1'], name:'货物类别1'},
+                            {value:data['total']['g2'], name:'货物类别2'},
+                            {value:data['total']['g3'], name:'货物类别3'},
+                            {value:data['total']['g4'], name:'货物类别4'},
+                            {value:data['total']['g5'], name:'货物类别5'}
+                        ],
+                        itemStyle: {
+                            emphasis: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }
+                ]
+            };
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);                
+        }
+    </script>
+
+    <script>
+        let weekBtn = document.querySelector('#week');
+        let monthBtn = document.querySelector('#month');
+        let houseidInp = document.querySelector('#houseid');
+        let weekRequire = {type:'week',};
+        let monthRequire = {type:'month',};
+
+
+        
+        function require(requireData){
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "http://127.0.0.1:5000/inquire", true);
+            xhr.setRequestHeader('content-type', 'application/json');
+            // if(i==1){
+            //     let requireData=weekRequire;
+            // }else if(i==2){
+            //     let requireData=monthRequire;
+            // }
+            //将用户输入值序列化成字符串
+            xhr.send(JSON.stringify(requireData));
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    //根据服务器的响应内容格式处理响应结果
+                    var res = JSON.parse(xhr.responseText);
+                    console.log(res)
+                    if (res.status === 0) {
+                        let realData = res.result
+                        // showGraph(data)
+                        perceedData(realData);
+                    } else {
+                        alert('未查询到相关记录')
+                    }
+                } else {
+                    alert('查询失败')
+                }
+            }
+        }
+        weekBtn.onclick = () => {require(weekRequire)};
+        monthBtn.onclick =() => {require(monthRequire)};
+    </script>
+
+
+
+    <script type="text/javascript">
+        // 左边的图片生成
+        function graph1(){
+            var myChart = echarts.init(document.getElementById('block1'),'blue');
+            var option = {
+                baseOption:{
+                    // title: {
+                    //     text: 'Bar Chart with Negative Value'
+                    // },
+                    legend: {},
+                    tooltip: {
+                        trigger: 'axis',
+                        showContent: false
+                    },
+                    dataset: {
+                        source: data                            
+                    },
+                    xAxis: {type: 'category',boundaryGap: false,},
+                    yAxis: {gridIndex: 0},
+                    grid: { width:'90%', height:'40%',top: '55%',left:'5%'},
+                    series: [
+                        {type: 'line', seriesLayoutBy: 'row'},
+                        {type: 'line', seriesLayoutBy: 'row'},
+                        {type: 'line', seriesLayoutBy: 'row'},
+                        {type: 'line', seriesLayoutBy: 'row'},
+                        {type: 'line', seriesLayoutBy: 'row'},
+                        {type: 'line', seriesLayoutBy: 'row'},
+                        {type: 'line', seriesLayoutBy: 'row'},
+                        {type: 'line', seriesLayoutBy: 'row'},
+                        {
+                            type: 'pie',
+                            id: 'pie',
+                            radius: ['25%', '43%'],
+                            center: ['50%', '30%'],
+                            label: {
+                                formatter: '{b}: {@2012} ({d}%)'
+                            },
+                            encode: {
+                                itemName: '日期',
+                                value: '7-31',//此处设置初始化时默认的Y轴起点，否则初始化渲染图表的时候，左边的饼状图会是空白
+                                tooltip: '7-31',//此处设置初始化时默认的Y轴起点，否则初始化渲染图表的时候，左边的饼状图会是空白
+                            }
+                        }
+                    ]
+                },
+                media: [                    
+                ]
+            };
+            myChart.on('updateAxisPointer', function (event) {
+                var xAxisInfo = event.axesInfo[0];
+                if (xAxisInfo) {
+                    var dimension = xAxisInfo.value + 1;
+                    myChart.setOption({
+                        series: {
+                            id: 'pie',
+                            label: {
+                                formatter: '{b}: {@[' + dimension + ']} ({d}%)'
+                            },
+                            encode: {
+                                value: dimension,
+                                tooltip: dimension
+                            }
+                        }
+                    });
+                }
+            });
+            myChart.setOption(option);
+        }
+        graph1();
+    </script>
+
+
+</html>    

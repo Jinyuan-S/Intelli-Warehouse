@@ -1,17 +1,28 @@
 .inp::-webkit-input-placeholder { /* WebKit browsers */ 
-    color:blue; 
+    color:rgb(0, 68, 255);
     } 
     
     input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */ 
-    color:blue; 
+    color:rgb(0, 68, 255);
     } 
     
     input::-moz-placeholder { /* Mozilla Firefox 19+ */ 
-    color:blue;
+    color:rgb(0, 68, 255);
     } 
     
     input:-ms-input-placeholder { /* Internet Explorer 10+ */ 
-    color:blue;
+    color:rgb(0, 68, 255);
     } 
+
+    .choose{
+
+        width: 20%;
+        height: 33px;
+        background-color: #39449a;
+        border: 1px;
+        color: white;
+        border-radius:1px;
+
+    }
     
     
