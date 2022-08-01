@@ -150,6 +150,16 @@ def inquire():
             ret['status'] = 0
             ret['result'] = records
 
+    elif req['type'] == 'trans':
+        rows, records = db.query(
+            'SELECT * FROM Trans ORDER BY transmissionId DESC', True)
+        if rows == 0:
+            ret['status'] = 204  # 暂无小车上传记录
+            ret['result'] = []
+        else:
+            ret['status'] = 0
+            ret['result'] = records
+
     # print(ret)
     return json.dumps(ret, default=str)
 
