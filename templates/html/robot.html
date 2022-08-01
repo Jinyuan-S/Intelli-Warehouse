@@ -46,7 +46,7 @@
                                 <!-- <div class="layui-inline layui-show-xs-block">
                                     <input type="text" name="username" placeholder="请输入仓库号" autocomplete="off" class="layui-input" id="houseidText">
                                 </div> -->
-                                <div class="layui-inline layui-show-xs-block">
+                                <div class="layui-inline layui-show-xs-block" style="text-align: center;">
                                     <button type="button" class="layui-btn" lay-submit="" lay-filter="sreach" id="reseach" >点击查询
                                         <i class="layui-icon">&#xe615;</i></button>
                                 </div>
@@ -149,16 +149,17 @@
                 ,cols: [[ //标题栏
                     // {type: 'checkbox', title: '选中', fixed: 'left'},
                     {type: 'checkbox', title: '选中', width:50,},
-                    // {field: 'shelfNo', title: '记录ID', width: 90, sort: true, totalRowText:"本页总计"},
-                    // {field: 'datetime', title: '时间', width: 160,sort: true, edit: 'text'},
-                    {field: 'houseId', title: '仓库', width: 58,},
-                    {field: 'position', title: '货架', width: 58,},
+                    {field: 'transmissionId', title: '记录ID', width: 90, sort: true,},
+                    {field: 'receiveTime', title: '记录时间', width: 160,sort: true, edit: 'text'},
+                    {field: 'hostIp', title: '设备IP', sort: true, width: 120,},
+                    {field: 'houseId', title: '仓库号', sort: true, width: 90,},
+                    {field: 'carId', title: '机器人ID', sort: true, width: 120,},
                     // {field: 'recordNo', title: '批次', width: 58, edit: 'text',},
-                    {field: 'g1', title: '物品类别1', width: 150, totalRow: true, edit: 'text'},
-                    {field: 'g2', title: '物品类别2', width: 150, totalRow: true, edit: 'text'},
-                    {field: 'g3', title: '物品类别3', width: 150, totalRow: true, edit: 'text'},
-                    {field: 'g4', title: '物品类别4', width: 150, totalRow: true, edit: 'text'},
-                    {field: 'g5', title: '物品类别5', width: 150, totalRow: true, edit: 'text'},
+                    {field: 'dataLength', title: '数据长度', width: 150, edit: 'text'},
+                    {field: 'receiveStatus', title: '读取状态', width: 150, edit: 'text'},
+                    {field: 'writeStatus', title: '写入状态', width: 150, edit: 'text'},
+                    // {field: 'g4', title: '物品类别4', width: 150, totalRow: true, edit: 'text'},
+                    // {field: 'g5', title: '物品类别5', width: 150, totalRow: true, edit: 'text'},
                     {field: 'button', title: '操作',  toolbar:"#btn",width: 150},
                 ]]
                 ,data: a
@@ -259,30 +260,19 @@
     <script>
         // 处理服务器端发来的结果数据，变成表格的数据格式，然后塞进showTable函数里面
         function reseachForTable(data){
-            let charArr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
-            let result=[{"shelfNo": data['A']['shelfNo']
-                    ,"houseId": data['houseId']
-                    , "datetime": data['datetime']
-                    , "position": data['A']['position']
-                    , "recordNo": data['A']['recordNo']
-                    , "g1": data['A']['g1']
-                    , "g2": data['A']['g2']
-                    , "g3": data['A']['g3']
-                    , "g4": data['A']['g4']
-                    , "g5": data['A']['g5']
-                    }];
-            for (let i = 1; i < charArr.length; i++) {
-                let item ={"shelfNo": data[charArr[i]]['shelfNo']
-                    ,"houseId": data['houseId']
-                    , "datetime": data['datetime']
-                    , "position": data[charArr[i]]['position']
-                    , "recordNo": data[charArr[i]]['recordNo']
-                    , "g1": data[charArr[i]]['g1']
-                    , "g2": data[charArr[i]]['g2']
-                    , "g3": data[charArr[i]]['g3']
-                    , "g4": data[charArr[i]]['g4']
-                    , "g5": data[charArr[i]]['g5']
-                    };
+            var result=[];
+            for(let i=0;i<data.length;i++){
+                let item = {
+                    "transmissionId": data[i]["transmissionId"],
+                    "receiveTime": data[i]["receiveTime"], 
+                    "hostIp": data[i]["hostIp"], 
+                    "houseId": data[i]["houseId"], 
+                    "carId": data[i]["carId"], 
+                    "dataLength": data[i]["dataLength"], 
+                    "receiveStatus": data[i]["receiveStatus"], 
+                    "writeStatus": data[i]["writeStatus"],
+                };
+                
                 result.push(item);
             }
             showTable(result)
@@ -291,12 +281,12 @@
 
 
     <script>
-        let houseidInp = document.querySelector('#houseidText')
+        // let houseidInp = document.querySelector('#houseidText')
         let reseachBtn = document.querySelector('#reseach')
         reseachBtn.onclick = () => {
             let requireData = {
-                    type: 'now',
-                    houseId: houseidInp.value
+                    type: 'trans',
+                    // houseId: houseidInp.value
                     }
                 var xhr = new XMLHttpRequest();
                 xhr.open("POST", "http://127.0.0.1:5000/inquire", true);
@@ -324,7 +314,18 @@
     </script>
 
     <script>
-        data={"recordNo": 5, "houseId": 1, "datetime": "2022-07-06 17:31:46", "A": {"shelfNo": 23, "position": "A", "recordNo": 5, "g1": 2, "g2": 0, "g3": 0, "g4": 0, "g5": 0}, "B": {"shelfNo": 24, "position": "B", "recordNo": 5, "g1": 0, "g2": 1, "g3": 1, "g4": 0, "g5": 0}, "C": {"shelfNo": 25, "position": "C", "recordNo": 5, "g1": 0, "g2": 0, "g3": 0, "g4": 1, "g5": 3}, "D": {"shelfNo": 26, "position": "D", "recordNo": 5, "g1": 0, "g2": 2, "g3": 0, "g4": 0, "g5": 0}, "E": {"shelfNo": 27, "position": "E", "recordNo": 5, "g1": 0, "g2": 0, "g3": 2, "g4": 0, "g5": 0}, "F": {"shelfNo": 28, "position": "F", "recordNo": 5, "g1": 1, "g2": 0, "g3": 0, "g4": 0, "g5": 0}, "G": {"shelfNo": 29, "position": "G", "recordNo": 5, "g1": 0, "g2": 0, "g3": 1, "g4": 2, "g5": 3}, "H": {"shelfNo": 30, "position": "H", "recordNo": 5, "g1": 0, "g2": 0, "g3": 0, "g4": 0, "g5": 0}, "I": {"shelfNo": 31, "position": "I", "recordNo": 5, "g1": 1, "g2": 0, "g3": 2, "g4": 0, "g5": 0}, "J": {"shelfNo": 32, "position": "J", "recordNo": 5, "g1": 1, "g2": 1, "g3": 1, "g4": 1, "g5": 1}, "total": {"shelfNo": 33, "position": "all", "recordNo": 5, "g1": 5, "g2": 4, "g3": 7, "g4": 4, "g5": 7}}
+        var data=[
+            // {"transmissionId": 10, "receiveTime": "2022-07-30 20:56:08", "hostIp": "127.0.0.1", "houseId": 1, "carId": "16", "dataLength": 249, "receiveStatus": "success", "writeStatus": "success"},
+            {"transmissionId": 9, "receiveTime": "2022-07-30 20:56:08", "hostIp": "127.0.0.1", "houseId": 1, "carId": "16", "dataLength": 249, "receiveStatus": "success", "writeStatus": "success"},
+            {"transmissionId": 8, "receiveTime": "2022-07-30 20:56:06", "hostIp": "127.0.0.1", "houseId": 1, "carId": "16", "dataLength": 249, "receiveStatus": "success", "writeStatus": "success"}, 
+            {"transmissionId": 7, "receiveTime": "2022-07-30 20:25:42", "hostIp": "127.0.0.1", "houseId": 1, "carId": "16", "dataLength": 249, "receiveStatus": "success", "writeStatus": "success"}, 
+            {"transmissionId": 6, "receiveTime": "2022-07-30 20:22:51", "hostIp": "127.0.0.1", "houseId": 1, "carId": "152", "dataLength": 247, "receiveStatus": "success", "writeStatus": "success"},
+            {"transmissionId": 5, "receiveTime": "2022-07-30 20:22:49", "hostIp": "127.0.0.1", "houseId": 1, "carId": "152", "dataLength": 247, "receiveStatus": "success", "writeStatus": "success"}, 
+            {"transmissionId": 4, "receiveTime": "2022-07-30 20:22:47", "hostIp": "127.0.0.1", "houseId": 1, "carId": "152", "dataLength": 247, "receiveStatus": "success", "writeStatus": "success"}, 
+            {"transmissionId": 3, "receiveTime": "2022-07-30 20:22:45", "hostIp": "127.0.0.1", "houseId": 1, "carId": "152", "dataLength": 247, "receiveStatus": "success", "writeStatus": "success"}, 
+            {"transmissionId": 2, "receiveTime": "2022-07-30 20:22:01", "hostIp": "127.0.0.1", "houseId": 1, "carId": "152", "dataLength": 247, "receiveStatus": "success", "writeStatus": "success"}, 
+            {"transmissionId": 1, "receiveTime": "2022-07-30 17:22:33", "hostIp": "192.168.1.12", "houseId": 1, "carId": "123", "dataLength": 247, "receiveStatus": "success", "writeStatus": "success"},
+        ];
         reseachForTable(data)
     </script>
 </html>
